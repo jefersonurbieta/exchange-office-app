@@ -1,0 +1,72 @@
+{
+    "name": "primecash-app",
+    "version": "1.0.0-ALFA.1",
+    "private": false,
+    "scripts": {
+        "serve": "vue-cli-service serve --port 3000",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "@azinformatica/loki": "^2.9.1",
+        "accounting": "^0.4.1",
+        "autonumeric": "^4.6.0",
+        "axios": "^0.27.2",
+        "core-js": "^3.22.5",
+        "keycloak-js": "^18.0.0",
+        "lodash": "^4.17.21",
+        "material-design-icons-iconfont": "^6.7.0",
+        "moment": "^2.29.3",
+        "moment-timezone": "^0.5.34",
+        "pdfjs-dist": "^2.14.305",
+        "scrollmonitor": "1.2.9",
+        "stylus": "^0.54.5",
+        "stylus-loader": "^3.0.2",
+        "validator-brazil": "^1.2.2",
+        "vee-validate": "^3.4.14",
+        "vue": "^2.6.14",
+        "vue-gtag": "^1.16.1",
+        "vue-loader": "^17.0.0",
+        "vue-moment": "^4.1.0",
+        "vue-radial-progress": "^0.3.2",
+        "vue-router": "^3.5.3",
+        "vue-the-mask": "^0.11.1",
+        "vue-timers": "^2.0.4",
+        "vuejs-logger": "^1.5.5",
+        "vuetify": "^2.6.5",
+        "vuex": "^3.6.2"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^6.8.0",
+        "eslint-plugin-vue": "^6.2.2",
+        "sass": "~1.32.6",
+        "sass-loader": "^10.2.1",
+        "vue-cli-plugin-vuetify": "~2.4.8",
+        "vue-template-compiler": "^2.6.14",
+        "vuetify-loader": "^1.7.3",
+        "webpack": "^4.36.0"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {}
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}
