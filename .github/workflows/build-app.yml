@@ -24,12 +24,9 @@ jobs:
             -   name: get-npm-version
                 id: package-version
                 uses: martinbeentjes/npm-get-version-action@main
-                with:
-                    path: app
 
             -   name: Build and push
                 uses: docker/build-push-action@v3
                 with:
-                    context: "{{defaultContext}}:app"
                     push: true
-                    tags: jefersonurbieta/exchange-office-app:latest
+                    tags: jefersonurbieta/exchange-office-app:${{steps.package-version.outputs.current-version}}
