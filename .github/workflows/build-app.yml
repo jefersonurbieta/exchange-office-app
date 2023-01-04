@@ -21,9 +21,9 @@ jobs:
                     username: ${{ secrets.DOCKERHUB_USERNAME }}
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: Read package.json
-              uses: dutscher/read-package-json-endpoint-actions@v1.33.7
-              id: package-json-endpoint
+            -   name: Read package.json
+                uses: dutscher/read-package-json-endpoint-actions@v1.33.7
+                id: package-json-endpoint
 
             -   name: Build and push
                 uses: docker/build-push-action@v3
