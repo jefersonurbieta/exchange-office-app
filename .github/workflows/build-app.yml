@@ -21,12 +21,11 @@ jobs:
                     username: ${{ secrets.DOCKERHUB_USERNAME }}
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            -   name: Make package.json visible
-                run: ls
-
             -   name: get-npm-version
                 id: package-version
                 uses: martinbeentjes/npm-get-version-action@main
+                with:
+                    path: .
 
             -   name: Build and push
                 uses: docker/build-push-action@v3
