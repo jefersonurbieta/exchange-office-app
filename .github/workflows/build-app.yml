@@ -21,12 +21,12 @@ jobs:
                     username: ${{ secrets.DOCKERHUB_USERNAME }}
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            -   name: get-npm-version
-                id: package-version
-                uses: martinbeentjes/npm-get-version-action@main
+            - name: Read package.json
+              uses: dutscher/read-package-json-endpoint-actions@v1.33.7
+              id: package-json-endpoint
 
             -   name: Build and push
                 uses: docker/build-push-action@v3
                 with:
                     push: true
-                    tags: jefersonurbieta/exchange-office-app:${{steps.package-version.outputs.current-version}}
+                    tags: jefersonurbieta/exchange-office-app:${{ steps.package-json-endpoint.outputs.endpoint }}
