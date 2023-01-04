@@ -21,6 +21,7 @@ jobs:
                     username: ${{ secrets.DOCKERHUB_USERNAME }}
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+            -   uses: actions/checkout@v2
             -   uses: bbonkr/get-version-action@v1.0.4
                 id: get_version
                 with:
