@@ -22,7 +22,7 @@ jobs:
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             -   name: Make package.json visible
-                run: chmod 777 ./package.json
+                run: ls
 
             -   name: get-npm-version
                 id: package-version
