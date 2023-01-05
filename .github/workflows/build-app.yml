@@ -22,7 +22,7 @@ jobs:
                     password: ${{ secrets.DOCKERHUB_TOKEN }}
 
             -   uses: actions/checkout@v2
-            -   uses: bbonkr/get-version-action@v1.0.4
+            -   uses: bbonkr/get-version-action@v1.0.5
                 id: get_version
                 with:
                     project: "./package.json"
