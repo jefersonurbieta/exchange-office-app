@@ -63,4 +63,11 @@ export default {
         FIND_BY_ID: 'USER.FIND_BY_ID',
         SAVE: 'USER.SAVE',
     },
+    EXPENSE: {
+        FIND_ALL: 'EXPENSE.FIND_ALL',
+        FIND_ALL_COMPLETE: 'EXPENSE.FIND_ALL_COMPLETE',
+        FIND_BY_ID: 'EXPENSE.FIND_BY_ID',
+        SAVE: 'EXPENSE.SAVE',
+        REMOVE: 'EXPENSE.REMOVE'
+    },
 }

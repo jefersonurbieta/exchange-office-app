@@ -58,5 +58,10 @@ export default {
     },
     INSTALLMENT: {
         LIST: 'installment.list',
-    }
+    },
+    EXPENSE: {
+        LIST: 'expense.list',
+        NEW: 'expense.new',
+        EDIT: 'expense.edit',
+    },
 }

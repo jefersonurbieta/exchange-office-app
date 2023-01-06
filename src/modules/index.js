@@ -9,6 +9,7 @@ import auth from '@/modules/auth'
 import closure from '@/modules/closure'
 import company from '@/modules/company'
 import installment from '@/modules/installment'
+import expense from '@/modules/expense'
 
 export default {
     account,
@@ -21,5 +22,6 @@ export default {
     auth,
     closure,
     company,
-    installment
+    installment,
+    expense
 }
