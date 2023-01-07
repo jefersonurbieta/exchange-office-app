@@ -1,20 +1,13 @@
 import { actionTypes } from '@/core/constants'
 import Http from '@/core/utils/Http'
+import moment from "moment/moment";
 
 export default {
 
-    async [actionTypes.PROFIT.BUSCAR_LUCRO_GERAL](context, filtro) {
-        const {data} = await Http.post('api/movimentacao/lucro/geral', filtro)
-        return data.data
+    async [actionTypes.PROFIT.FIND_ALL_COMPLETE](context, query) {
+        query.startDate = moment(query.startDate).format('yyyy-MM-DD')
+        query.endDate = moment(query.endDate).format('yyyy-MM-DD')
+        const {data} = await Http.post('api/movement/profit/advanced-search', query)
+        return data
     },
-
-    async [actionTypes.PROFIT.BUSCAR_LUCRO_POR_PRODUTOS]() {
-        const {data} = await Http.get('api/produtos/lucroPorProduto')
-        return data.data
-    },
-
-    async [actionTypes.PROFIT.BUSCAR_LUCRO_POR_USUARIOS]() {
-        const {data} = await Http.get('api/produtos/lucroPorUsuario')
-        return data.data
-    }
 }

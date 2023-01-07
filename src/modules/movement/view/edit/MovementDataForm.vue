@@ -226,9 +226,9 @@
         methods: {
             calcValues() {
                 if (this.value.operationType === movementOperationTypes.SALE) {
-                    this.value.iofRate = this.$store.state.loggedCompany.saleIOF
+                    this.value.iofRate = this.$store.state.loggedCompany.iofConfig.saleIOF
                 } else if (this.value.operationType === movementOperationTypes.PURCHASE) {
-                    this.value.iofRate = this.$store.state.loggedCompany.purchaseIOF
+                    this.value.iofRate = this.$store.state.loggedCompany.iofConfig.purchaseIOF
                 }
 
                 if (this.value.product.showAmount) {
@@ -251,6 +251,10 @@
 
                 if (this.value.product.showAmount) {
                     this.value.liquidRate = NumberUtils.roundValue(this.value.liquidValue / this.value.amount, this.value.product ? this.value.product.quantityDecimalPlacesValue : 2)
+                }
+
+                if (this.value.product.showCost && this.value.product.type === productTypes.CURRENCY) {
+                    this.value.productCost = this.value.product.cost
                 }
 
                 this.$emit('changedValues', this.value)

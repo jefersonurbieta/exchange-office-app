@@ -255,7 +255,10 @@ html, body, .application
         font-weight 600
 
 .v-sheet.v-card.v-sheet--shaped
-    border-radius 16px
+    border-radius 8px
+
+.v-sheet.v-sheet--shaped
+    border-radius 8px
 
 .v-application .text-typo
     color: #344767 !important;

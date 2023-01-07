@@ -128,7 +128,7 @@
                 }
             },
             async save() {
-                if (!this.localCustomer.name) {
+                if (!this.localCustomer.name || !this.localCustomer.email || !this.localCustomer.phone) {
                     await this.$validator._base.validateAll()
                     return
                 }

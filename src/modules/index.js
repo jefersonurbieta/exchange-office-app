@@ -10,6 +10,7 @@ import closure from '@/modules/closure'
 import company from '@/modules/company'
 import installment from '@/modules/installment'
 import expense from '@/modules/expense'
+import profit from '@/modules/profit'
 
 export default {
     account,
@@ -23,5 +24,6 @@ export default {
     closure,
     company,
     installment,
-    expense
+    expense,
+    profit
 }

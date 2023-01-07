@@ -9,7 +9,7 @@ export default [
         meta: {
             menu: {
                 title: 'Lucro',
-                icon: 'fa-light fa-building-columns'
+                icon: 'fa-solid fa-wallet'
             },
             page: {
                 title: 'Lucro',

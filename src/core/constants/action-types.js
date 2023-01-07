@@ -54,9 +54,7 @@ export default {
         REMOVE: 'PRODUCT.REMOVE',
     },
     PROFIT: {
-        BUSCAR_LUCRO_GERAL: 'buscarLucroGeral',
-        BUSCAR_LUCRO_POR_PRODUTOS: 'buscarLucroPorProdutos',
-        BUSCAR_LUCRO_POR_USUARIOS: 'buscarLucroPorUsuarios',
+        FIND_ALL_COMPLETE: 'PROFIT.FIND_ALL_COMPLETE',
     },
     USER: {
         FIND_ALL: 'USER.FIND_ALL',

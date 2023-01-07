@@ -1,13 +1,26 @@
 <template>
-    <v-card class="container-card pa-0" outlined shaped>
-        <v-card-title v-if="title">
-            <v-icon v-if="icon" class="mr-2">{{ icon }}</v-icon>
-            {{ title }}
-        </v-card-title>
-        <div class="az-form-content">
+    <material-card :color="color">
+        <template v-if="title" v-slot:heading>
+            <v-row>
+                <v-col v-if="icon" sm="1" align-self="center">
+                    <v-icon class="mr-2">{{ icon }}</v-icon>
+                </v-col>
+                <v-col :sm="icon ? 11 : 12">
+                    <div class="title font-weight-light">
+                        {{ title }}
+                    </div>
+
+                    <div v-if="subtitle" class="body-1 font-weight-light">
+                        {{subtitle}}
+                    </div>
+                </v-col>
+            </v-row>
+
+        </template>
+        <v-card-text class="az-form-content">
             <slot/>
-        </div>
-    </v-card>
+        </v-card-text>
+    </material-card>
 </template>
 
 <script>
@@ -17,9 +30,17 @@
                 type: String,
                 default: null
             },
+            subtitle: {
+                type: String,
+                default: null
+            },
             icon: {
                 type: String,
                 default: null
+            },
+            color: {
+                type: String,
+                default: 'primary'
             }
         }
     }
