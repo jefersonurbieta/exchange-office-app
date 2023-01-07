@@ -51,24 +51,22 @@
                 <v-dialog
                     v-model="dialog"
                     persistent
-                    max-width="70%">
-                    <v-card>
-                        <v-card-title>
-                            <span class="text-h5">User Profile</span>
-                        </v-card-title>
-                        <v-card-text>
-                            <customer-form
-                                v-model="localCustomer"
-                                :editable="true"/>
-                        </v-card-text>
-                        <v-card-actions>
+                    content-class="dialog-with-title"
+                    max-width="70%"
+                    >
+                    <container-card title="Cliente">
+                        <customer-form
+                            v-model="localCustomer"
+                            :editable="true"/>
+
+                        <v-row justify="center" class="mb-8">
                             <v-spacer></v-spacer>
                             <form-buttons
                                 :editable="true"
                                 @cancel="cancel"
                                 @save="save"/>
-                        </v-card-actions>
-                    </v-card>
+                        </v-row>
+                    </container-card>
                 </v-dialog>
             </v-col>
         </v-row>
@@ -189,5 +187,9 @@
     }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+.dialog-with-title
+    padding-top 40px
+    overflow-x hidden
+
 </style>

@@ -1,7 +1,8 @@
 <template>
-    <v-toolbar-items class="az-avatar">
+    <v-toolbar-items class="az-avatar teste">
         <v-dialog
             v-model="dialog"
+            content-class="overflow-visible"
             width="500">
             <template v-slot:activator="{ on, attrs }">
                 <v-btn v-on="on" class="az-avatar__username" text color="#777">

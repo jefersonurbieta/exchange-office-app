@@ -8,6 +8,8 @@
                 @click="$emit('new')">
                 Novo
             </v-btn>
+
+            <slot name="buttons"/>
         </v-col>
 
         <v-col cols="6" v-if="advancedSearch">

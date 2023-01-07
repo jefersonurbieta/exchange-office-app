@@ -6,6 +6,16 @@
             :adminNew="true"
             :advancedSearch="true"
             @new="newEvent()">
+            <template v-slot:buttons>
+                <v-btn
+                    depressed
+                    color="secondary"
+                    class="ml-4"
+                    @click="csv">
+                    Exportar
+                </v-btn>
+            </template>
+
             <customer-filter
                 :filter="filter"
                 @clear="cleanFilter"
@@ -21,6 +31,8 @@
             :loading="loading"
             @changePage="advancedSearch"
             @click:row="clickRow"/>
+
+
     </page-container>
 </template>
 
@@ -72,6 +84,9 @@
                 this.$store.commit(mutationTypes.CUSTOMER.SET_FILTER, this.$store.state.customer.defaultFilter)
                 this.filter = this.$store.state.customer.filter
                 this.resetTable()
+            },
+            async csv() {
+                await this.$store.dispatch(actionTypes.CUSTOMER.EXPORT_CSV)
             }
         }
     }

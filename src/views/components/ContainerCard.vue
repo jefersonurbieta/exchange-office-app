@@ -17,9 +17,13 @@
             </v-row>
 
         </template>
-        <v-card-text class="az-form-content">
+        <div class="az-form-content">
             <slot/>
-        </v-card-text>
+
+        </div>
+            <template v-if="$slots.actions" v-slot:actions>
+                <slot name="actions"/>
+            </template>
     </material-card>
 </template>
 

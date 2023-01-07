@@ -28,6 +28,7 @@ export default {
         SAVE: 'CUSTOMER.SAVE',
         REMOVE: 'CUSTOMER.REMOVE',
         FIND_ZIP_CODE: 'CUSTOMER.FIND_ZIP_CODE',
+        EXPORT_CSV: 'CUSTOMER.EXPORT_CSV',
     },
     MOVEMENT: {
         SAVE: 'MOVEMENT.SAVE',

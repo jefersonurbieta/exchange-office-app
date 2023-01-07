@@ -63,4 +63,14 @@ export default {
 
         return data
     },
+
+    async [actionTypes.CUSTOMER.EXPORT_CSV]() {
+        const response = await Http.get('api/customer/csv', {responseType: 'blob'})
+        const blob = new Blob([response.data], { type: 'text/csv' })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = 'clientes'
+        link.click()
+        URL.revokeObjectURL(link.href)
+    },
 }

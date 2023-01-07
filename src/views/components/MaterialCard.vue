@@ -66,7 +66,6 @@
 
         <template v-if="$slots.actions">
             <v-divider class="mt-2"/>
-
             <v-card-actions class="pb-0">
                 <slot name="actions"/>
             </v-card-actions>
