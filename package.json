@@ -1,6 +1,6 @@
 {
     "name": "exchange-office-app",
-    "version": "1.0.0-ALFA.1",
+    "version": "1.1.0",
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve --port 3000",
