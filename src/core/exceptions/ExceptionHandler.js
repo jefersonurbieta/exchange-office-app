@@ -65,7 +65,6 @@ export default class ExceptionHandler {
     }
 
     handleInternalError(error) {
-        console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd')
         if (typeof error.response.data.message !== 'undefined') {
             const msgFormatted = error.response.data.message
             if (msgFormatted) {

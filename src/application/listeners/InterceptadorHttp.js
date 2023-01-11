@@ -27,9 +27,7 @@ class InterceptadorHttp {
     }
 
     tratarRequest(config) {
-        // loading.start()
         const token = localStorage.getItem('vue-token')
-        console.log(token)
         if (token) {
             config.headers["Authorization"] = 'Bearer ' + token
         }

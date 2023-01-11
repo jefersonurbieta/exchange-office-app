@@ -28,12 +28,10 @@ export default {
         }
     },
     async mounted() {
-        console.log(this.company)
         this.id = this.$route.params.id
         await this.loadRecord()
 
         this.setEditing()
-        console.log(this.company)
     },
     methods: {
         setEditing() {

@@ -161,7 +161,6 @@ export default {
     watch: {
         value() {
             if (this.value && this.value.companies) {
-                console.log('fdf')
                 this.value.companiesIds = this.value.companies.map(value => value.companyId)
                 this.selectedCompanies = this.$store.state.userCompanies.filter(company => this.value.companiesIds.includes(company.companyId))
             }

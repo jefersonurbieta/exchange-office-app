@@ -53,11 +53,29 @@
                             shaped/>
                         <field-view v-else :text="statusTypes.getName(value.status)"/>
                     </v-col>
+
+                    <v-col cols="12" sm="6" v-if="adminUser() && !value.id">
+                        <field-label>Criar usuário</field-label>
+                        <v-select
+                            v-model="value.createUser"
+                            :disabled="!editable"
+                            :error-messages="errors.first('Criar usuário')"
+                            :items="booleanTypes.list"
+                            item-text="name"
+                            item-value="value"
+                            name="Criar usuário"
+                            placeholder="Ex. Sim"
+                            required
+                            v-validate="'required'"
+                            solo
+                            flat
+                            shaped/>
+                    </v-col>
                 </v-row>
             </div>
         </container-card>
 
-        <container-card class="mt-5" title="Usuario" v-if="adminUser() && !value.id">
+        <container-card class="mt-5" title="Usuário" v-if="adminUser() && !value.id && value.createUser">
             <div class="az-form-content">
                 <v-row>
                     <v-col cols="12" sm="6">
@@ -65,9 +83,9 @@
                         <v-text-field
                             v-model="value.userName"
                             :disabled="!editable"
-                            :error-messages="errors.first('Nome')"
+                            :error-messages="errors.first('NomeUsuario')"
                             maxlength="100"
-                            name="Nome"
+                            name="NomeUsuario"
                             placeholder="Ex. Dinheiro"
                             required
                             solo
@@ -127,7 +145,7 @@
             </div>
         </container-card>
 
-        <container-card title="IOF" class="mt-5">
+        <container-card title="IOF" class="mt-5" v-if="value.id">
             <div class="az-form-content">
                 <v-row>
                     <v-col cols="12" sm="6">
@@ -156,7 +174,7 @@
             </div>
         </container-card>
 
-        <container-card title="Boleto" class="mt-5">
+        <container-card title="Boleto" class="mt-5" v-if="value.id">
             <div class="az-form-content">
                 <v-row>
                     <v-col cols="12">
@@ -238,7 +256,7 @@
             </div>
         </container-card>
 
-        <container-card title="Tela de Parcelamento" class="mt-5">
+        <container-card title="Tela de Parcelamento" class="mt-5" v-if="value.id">
             <div class="az-form-content">
                 <v-row>
                     <v-col cols="12" sm="6">

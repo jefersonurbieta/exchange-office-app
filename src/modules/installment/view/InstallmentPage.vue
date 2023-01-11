@@ -69,7 +69,6 @@ export default {
                 value: this.value,
                 rate: this.rate
             })
-            console.log(this.installments)
         }
     }
 }

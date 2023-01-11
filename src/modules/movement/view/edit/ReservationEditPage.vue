@@ -189,7 +189,6 @@ export default {
             this.redirectToListing()
         },
         checkAllowedAmount() {
-            console.log(this.movement.product)
             if (this.movement.type === movementTypes.PURCHASE_SALE
                 && this.movement.operationType === movementOperationTypes.SALE
                 && this.movement.product
