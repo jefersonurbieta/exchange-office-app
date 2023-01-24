@@ -4,6 +4,7 @@
             :filter="filter"
             @advancedSearch="resetTable">
             <movement-filter
+                v-if="!loading"
                 :filter="filter"
                 :accounts="accounts"
                 :products="products"

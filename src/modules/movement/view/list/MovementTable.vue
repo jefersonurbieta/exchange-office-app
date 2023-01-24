@@ -25,6 +25,12 @@
             <template v-slot:item.amount="{ item }">
                 {{ hideByType(item) | value }}
             </template>
+            <template v-slot:item.productCost="{ item }">
+                {{ item.productCost | real }}
+            </template>
+            <template v-slot:item.liquidRate="{ item }">
+                {{ item.liquidRate | real }}
+            </template>
             <template v-slot:item.value="{ item }">
                 {{ item.value | real }}
             </template>
@@ -73,13 +79,6 @@
                 },
                 columns: [
                     {
-                        text: 'Código',
-                        align: 'center',
-                        value: 'code',
-                        class: 'primary--text',
-                        width: '1%'
-                    },
-                    {
                         text: 'Data',
                         align: 'center',
                         value: 'createdAt',
@@ -123,6 +122,20 @@
                         width: '1%'
                     },
                     {
+                        text: 'Custo',
+                        align: 'right',
+                        value: 'productCost',
+                        class: 'primary--text',
+                        width: '1%'
+                    },
+                    {
+                        text: 'Taxa',
+                        align: 'right',
+                        value: 'liquidRate',
+                        class: 'primary--text',
+                        width: '1%'
+                    },
+                    {
                         text: 'Valor',
                         align: 'right',
                         value: 'value',
@@ -140,7 +153,7 @@
                         text: '',
                         align: 'left',
                         value: 'action',
-                        width: '2%',
+                        width: '1%',
                         class: 'primary--text'
                     }
                 ],

@@ -2,8 +2,8 @@
     <page-container>
         <back-button
             :route="{name: routeTypes.CUSTOMER.LIST}"
-            :show-options="editing && customer.id"
-            :show-remove="editing && customer.id"
+            :show-options="editing && customer.id != null"
+            :show-remove="editing && customer.id != null"
             @remove="remove"/>
 
         <customer-form

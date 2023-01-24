@@ -41,4 +41,9 @@ export default {
         await Http.delete(`api/product/${id}`)
     },
 
+    async [actionTypes.PRODUCT.FIND_ALL_CATEGORIES]() {
+        const {data} = await Http.get('api/product/categories')
+        return data
+    },
+
 }

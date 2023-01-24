@@ -2,8 +2,8 @@
     <page-container manager-view>
         <back-button
             :route="{name: routeTypes.EXPENSE.LIST}"
-            :show-options="editing && expense.id"
-            :show-remove="editing && expense.id"
+            :show-options="editing && expense.id != null"
+            :show-remove="editing && expense.id != null"
             @remove="remove"/>
 
         <expense-form

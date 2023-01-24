@@ -56,6 +56,19 @@
                 </v-col>
 
                 <v-col cols="12" sm="6">
+                    <field-label>Categoria</field-label>
+                    <v-combobox
+                        v-model="value.category"
+                        :disabled="!editable"
+                        :items="categories"
+                        name="Categoria"
+                        placeholder="Ex. Local"
+                        solo
+                        flat
+                        shaped/>
+                </v-col>
+
+                <v-col cols="12" sm="6">
                     <field-label>Ordem</field-label>
                     <v-text-field
                         v-model="value.order"
@@ -207,6 +220,10 @@
             editable: {
                 type: Boolean,
                 default: false
+            },
+            categories: {
+                type: Array,
+                default: () => []
             }
         },
         data() {

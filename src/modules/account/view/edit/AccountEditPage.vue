@@ -2,8 +2,8 @@
     <page-container manager-view>
         <back-button
             :route="{name: routeTypes.ACCOUNT.LIST}"
-            :show-options="editing && account.id"
-            :show-remove="editing && account.id"
+            :show-options="editing && account.id != null"
+            :show-remove="editing && account.id != null"
             @remove="remove"/>
 
         <account-form

@@ -2,12 +2,13 @@
     <page-container manager-view>
         <back-button
             :route="{name: routeTypes.PRODUCT.LIST}"
-            :show-options="editing && product.id"
-            :show-remove="editing && product.id"
+            :show-options="editing && product.id != null"
+            :show-remove="editing && product.id != null"
             @remove="remove"/>
 
         <product-form
             v-model="product"
+            :categories="categories"
             :editable="editing || !product.id"/>
 
         <form-buttons
@@ -28,13 +29,15 @@
             return {
                 id: undefined,
                 editing: false,
-                product: _.clone(this.$store.state.product.defaultObject)
+                product: _.clone(this.$store.state.product.defaultObject),
+                categories: []
             }
         },
         async mounted() {
             this.id = this.$route.params.id
 
             await this.loadRecord()
+            await this.findAuxiliaryRecords()
             this.setEditing()
         },
         methods: {
@@ -47,6 +50,9 @@
                 } else {
                     this.product = _.clone(this.$store.state.product.defaultObject)
                 }
+            },
+            async findAuxiliaryRecords() {
+                this.categories = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_CATEGORIES)
             },
             async save() {
                 if (!await this.$validator._base.validateAll()) {

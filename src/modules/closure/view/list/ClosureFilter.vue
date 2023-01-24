@@ -1,6 +1,8 @@
 <template>
-    <az-search
+    <search
         :filter="activeFilters"
+        show-advanced-search
+        hide-simple-search
         simple-search-placeholder="Informe qualquer campo presente na tabela"
         @advanced-search="advancedSearch"
         @clear="clear"
@@ -34,7 +36,7 @@
                 name-date="dataFim"
                 v-model="filter.endDate.value"/>
         </az-search-item>
-    </az-search>
+    </search>
 </template>
 
 <script>

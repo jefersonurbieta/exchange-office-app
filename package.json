@@ -5,6 +5,7 @@
     "scripts": {
         "serve": "vue-cli-service serve --port 3000",
         "build": "vue-cli-service build",
+        "build:digitalOcean": "npm install && npm run build",
         "lint": "vue-cli-service lint"
     },
     "dependencies": {
@@ -18,7 +19,6 @@
         "material-design-icons-iconfont": "^4.0.2",
         "moment": "^2.22.2",
         "moment-timezone": "^0.5.23",
-        "pdfjs-dist": "^2.2.228",
         "scrollmonitor": "1.2.4",
         "stylus": "^0.54.5",
         "stylus-loader": "^3.0.2",
@@ -68,5 +68,8 @@
         "> 1%",
         "last 2 versions",
         "not dead"
-    ]
+    ],
+    "engines": {
+        "node": "16.x"
+    }
 }

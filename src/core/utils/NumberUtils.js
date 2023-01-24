@@ -1,5 +1,4 @@
 import accounting from 'accounting'
-import moment from 'moment'
 
 export default class NumberUtils {
 

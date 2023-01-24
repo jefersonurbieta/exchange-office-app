@@ -82,8 +82,11 @@ html, body, .application
         color #777
         font-size 13px
 
-.az-menu .v-list-item__action i
-    font-size 15px
+.az-menu
+    margin-bottom 48px
+
+    .v-list-item__action i
+        font-size 15px
 
 .az-container .v-card
     background rgb(255, 255, 255)

@@ -1,6 +1,6 @@
 <template>
     <v-row justify="center" class="mb-8">
-        <v-col cols="12" sm="4" md="3">
+        <v-col cols="12" sm="6" md="4">
             <material-stats-card
                 icon="fa-sharp fa-solid fa-wallet"
                 title="Lucro do período "
@@ -10,7 +10,7 @@
             />
         </v-col>
 
-        <v-col cols="12" sm="4" md="3">
+        <v-col cols="12" sm="6" md="4">
             <material-stats-card
                 icon="fa-sharp fa-thin fa-star"
                 title="Movimentações"
@@ -20,20 +20,11 @@
             />
         </v-col>
 
-        <v-col cols="12" sm="4" md="3">
+        <v-col cols="12" sm="6" md="4">
             <material-stats-card
                 icon="fa-sharp fa-solid fa-calendar"
                 title="Lucro deste mês"
                 :value="profit.inMonth | real"
-                sub-icon="mdi-clock"
-            />
-        </v-col>
-
-        <v-col cols="12" sm="4" md="3">
-            <material-stats-card
-                icon="fa-sharp fa-solid fa-calendar-week"
-                title="Média 6 meses"
-                :value="profit.average6Months | real"
                 sub-icon="mdi-clock"
             />
         </v-col>

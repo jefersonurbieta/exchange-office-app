@@ -15,6 +15,17 @@
                     name-date="Data"
                     v-model="endDate"/>
             </v-col>
+            <v-col cols="3">
+                <field-label>Categoria</field-label>
+                <v-combobox
+                    v-model="category"
+                    :items="categories"
+                    name="Categoria"
+                    clearable
+                    solo
+                    flat
+                    shaped/>
+            </v-col>
             <v-col class="mt-7" cols="3">
                 <v-btn @click="loadRecord" color="primary" depressed>Pesquisar</v-btn>
             </v-col>
@@ -89,14 +100,17 @@ export default {
             loading: true,
             startDate: undefined,
             endDate: undefined,
+            category: undefined,
             profit: {},
-            tabs: 0
+            tabs: 0,
+            categories: []
         }
     },
-    mounted() {
+    async mounted() {
         this.startDate = new Date()
         this.startDate.setDate(1)
         this.endDate = new Date()
+        await this.findAuxiliaryRecords()
     },
     methods: {
         async loadRecord() {
@@ -104,10 +118,14 @@ export default {
             this.loading = true
             this.profit = await this.$store.dispatch(actionTypes.PROFIT.FIND_ALL_COMPLETE, {
                 startDate: this.startDate,
-                endDate: this.endDate
+                endDate: this.endDate,
+                category: this.category
             })
             this.loading = false
-        }
+        },
+        async findAuxiliaryRecords() {
+            this.categories = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_CATEGORIES)
+        },
     }
 }
 </script>

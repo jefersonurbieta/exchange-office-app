@@ -2,8 +2,8 @@
     <page-container>
         <back-button
             :route="{name: routeTypes.MOVEMENT.LIST}"
-            :show-options="editing && movement.id"
-            :show-remove="editing && movement.id"
+            :show-options="editing && movement.id != null"
+            :show-remove="editing && movement.id != null"
             @remove="remove"/>
 
         <v-form

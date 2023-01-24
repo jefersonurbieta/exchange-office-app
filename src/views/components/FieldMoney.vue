@@ -1,6 +1,5 @@
 <template>
     <v-text-field
-        v-money="conditionalMoneyConfig"
         :name="name"
         :label="label"
         :maxlength="length"
@@ -107,7 +106,6 @@ export default {
                 thousands: '.',
                 prefix: this.prefix,
                 suffix: this.suffix,
-                precision: this.precision,
                 masked: false
             },
             clickedField: false,
@@ -119,13 +117,13 @@ export default {
     computed: {
         valueFormated() {
             if (this.value !== null) {
-                return accounting.formatMoney(this.value, this.prefix, this.precision, this.thousands, this.decimal)
+                return (this.value + '').replace('.', ',')
             } else {
                 return null
             }
         },
         conditionalMoneyConfig() {
-            return this.value !== null || this.clickedField ? this.moneyConfig : null
+            return this.value !== null || this.clickedField ? this.moneyConfig : this.moneyConfig
         },
         showClearButtonIf() {
             return this.value !== null && this.showClearButton ? 'fas fa-times-circle' : ''

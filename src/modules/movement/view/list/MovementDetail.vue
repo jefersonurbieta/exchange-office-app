@@ -8,7 +8,7 @@
                     <v-row>
                         <v-col cols="12" md="3" class="pt-3">
                             <field-label>Código</field-label>
-                            <field-view :text="item.id"/>
+                            <field-view :text="item.code"/>
                         </v-col>
                         <v-col cols="12" md="3" class="pt-3">
                             <field-label>Data</field-label>
