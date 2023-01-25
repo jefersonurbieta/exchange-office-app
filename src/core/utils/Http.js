@@ -7,6 +7,7 @@ export default class Http {
         const instance = axios.create()
         this.registerInterceptors(instance)
         this.setHeaderDefaultsValues(instance)
+        instance.defaults.baseURL = process.env.VUE_APP_API_URL
         return instance
     }
 
