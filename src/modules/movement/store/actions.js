@@ -53,7 +53,7 @@ export default {
         const form = document.createElement("form");
         form.target = '_blank'
         form.method = 'POST'
-        form.action = '/receipt'
+        form.action = `${process.env.VUE_APP_RECEIPT_URL}/receipt`
         form.style.display = 'none'
 
         const movementInput = document.createElement('input');
