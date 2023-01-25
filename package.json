@@ -4,7 +4,7 @@
     "private": false,
     "scripts": {
         "serve": "vue-cli-service serve --port 3000",
-        "build": "vue-cli-service build --dest _static",
+        "build": "vue-cli-service build --dest static",
         "build:digitalOcean": "npm install && npm run build",
         "lint": "vue-cli-service lint"
     },
