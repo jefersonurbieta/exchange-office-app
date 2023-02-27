@@ -58,9 +58,14 @@
                 </div>
             </v-card-text>
             <v-card-actions>
-                <v-spacer></v-spacer>
+<!--                <v-spacer></v-spacer>-->
+                <v-row align="center"
+                       align-content="center"
+                       justify="center"
+                       no-gutters>
+
                 <v-btn
-                    class="mr-2"
+                    class="mr-2 mt-2"
                     depressed
                     color="info"
                     shaped
@@ -70,7 +75,7 @@
                 </v-btn>
                 <v-btn
                     v-if="allowedEdit()"
-                    class="mr-2"
+                    class="mr-2 mt-2"
                     depressed
                     color="warning"
                     shaped
@@ -80,7 +85,7 @@
                 </v-btn>
                 <v-btn
                     v-if="allowedEdit()"
-                    class="mr-2"
+                    class="mr-2 mt-2"
                     depressed
                     color="error"
                     shaped
@@ -89,7 +94,7 @@
                     Remover
                 </v-btn>
                 <v-btn
-                    class="mr-2"
+                    class="mr-2 mt-2"
                     depressed
                     color="primary"
                     shaped
@@ -97,7 +102,8 @@
                     @click="$emit('print', item)">
                     Imprimir Boleto
                 </v-btn>
-                <v-spacer></v-spacer>
+                </v-row>
+<!--                <v-spacer></v-spacer>-->
             </v-card-actions>
         </v-card>
     </v-dialog>

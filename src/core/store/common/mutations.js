@@ -54,6 +54,7 @@ export default {
 
     [mutationTypes.COMMON.SET_COMPANY](state, value) {
         state.loggedCompany = value
+        document.title = value.name
     },
 
     [mutationTypes.COMMON.SET_COMPANIES](state, value) {
