@@ -50,8 +50,12 @@
                 if (!await this.$validator._base.validateAll()) {
                     return
                 }
+                this.enableLoading()
+
                 this.user = await this.$store.dispatch(actionTypes.USER.SAVE, this.user)
                 this.showSuccessNotification()
+
+                this.disableLoading()
                 this.redirectToListing()
             },
             async cancel() {

@@ -97,9 +97,9 @@ export default {
     },
     async mounted() {
         this.id = this.$route.params.id
+        this.view = this.$route.query.view
 
-        await this.loadRecord()
-        await this.findAuxiliaryRecords()
+        await this.findAuxiliaryRecordsPromise()
         await this.loadObjectsInRegistry()
 
         this.loading = false
@@ -116,19 +116,16 @@ export default {
                 this.editing = true
             }
 
+            if (this.view) {
+                this.editing = false
+            }
+
             if (this.movement.id && this.movement.targetType === movementTargetTypes.PRODUCT && this.movement.type === movementTypes.INPUT) {
                 const lastProductInputId = await this.$store.dispatch(actionTypes.MOVEMENT.FIND_LAST_PRODUCT_INPUT_ID, this.movement.productId)
 
                 if (lastProductInputId !== this.movement.id) {
                     this.editing = false
                 }
-            }
-        },
-        async loadRecord() {
-            if (this.id) {
-                this.movement = await this.$store.dispatch(actionTypes.MOVEMENT.FIND_BY_ID, this.id)
-            } else {
-                this.movement = _.clone(this.$store.state.movement.defaultObject)
             }
         },
         async changedType() {
@@ -141,10 +138,31 @@ export default {
         changedValues(value) {
             this.movement = value
         },
-        async findAuxiliaryRecords() {
-            this.accounts = await this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL)
-            this.products = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPANY)
-            this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL)
+        async findAuxiliaryRecordsPromise() {
+            const promises = []
+            if (this.id) {
+                promises.push(this.$store.dispatch(actionTypes.MOVEMENT.FIND_BY_ID, this.id))
+            } else {
+                this.movement = _.clone(this.$store.state.movement.defaultObject)
+                promises.push(new Promise((resolve) => resolve()))
+            }
+
+            promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE))
+            promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPANY))
+            promises.push(this.$store.dispatch(actionTypes.USER.FIND_ALL))
+
+            await Promise.all(promises)
+                .then((responses) => {
+                    if (this.id) {
+                        this.movement = responses[0]
+                    }
+                    this.accounts = responses[1]
+                    this.products = responses[2]
+                    this.users = responses[3]
+                })
+                .catch((error) => {
+                    console.error('Erro ao fazer requisições:', error);
+                });
         },
         async loadObjectsInRegistry() {
             if (this.movement.customerId) {
@@ -182,6 +200,7 @@ export default {
                 return
             }
 
+            this.enableLoading()
             const movementToSave = Object.assign({}, this.movement)
             delete movementToSave.customer
             delete movementToSave.account
@@ -191,6 +210,8 @@ export default {
 
             const movementSaved = await this.$store.dispatch(actionTypes.MOVEMENT.SAVE, movementToSave)
             this.showSuccessNotification()
+
+            this.disableLoading()
             this.redirectToListing(movementSaved)
         },
         async remove() {
@@ -202,9 +223,12 @@ export default {
                     return
                 }
             }
+            this.enableLoading()
 
             await this.$store.dispatch(actionTypes.MOVEMENT.REMOVE, this.movement.id)
             this.showSuccessNotification()
+
+            this.disableLoading()
             this.redirectToListing()
         },
         checkAllowedAmount() {
@@ -226,8 +250,8 @@ export default {
                 && this.movement.targetType === movementTargetTypes.ACCOUNT
                 && this.movement.account.value < this.movement.value)
         },
-        cancel() {
-            this.loadRecord()
+        async cancel() {
+            await this.findAuxiliaryRecordsPromise()
         },
         print() {
             this.$store.dispatch(actionTypes.MOVEMENT.PRINT, {

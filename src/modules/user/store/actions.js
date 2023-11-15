@@ -8,6 +8,11 @@ export default {
         return data
     },
 
+    async [actionTypes.USER.FIND_ALL_TO_BALANCE]() {
+        const {data} = await Http.get('api/user/balance')
+        return data
+    },
+
     async [actionTypes.USER.FIND_BY_ID](context, id) {
         const {data} = await Http.get(`api/user/${id}`)
         return data

@@ -16,43 +16,34 @@
 </template>
 
 <script>
-
-    import {actionTypes} from '@/core/constants'
-
-    export default {
-        data() {
-            return {
-                loading: true,
-                search: '',
-                items: [],
-                pagination: {
-                    itemsPerPage: 50,
-                    sortBy: [],
-                    sortDesc: []
-                },
-                columns: [
-                    {text: 'Nome', align: 'left', value: 'name'},
-                    {text: 'Saldo', align: 'right', value: 'balance'},
-                ]
-            }
+export default {
+    props: {
+        items: {
+            type: Array
         },
-        computed: {
-            total() {
-                return this.items.reduce((total, item) => total + item.balance, 0)
-            }
-        },
-        async mounted() {
-            await this.getAccounts()
-            this.loading = false
-        },
-        methods: {
-            async getAccounts() {
-                this.items = await this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {general: true})
-            }
+        loading: {
+            type: Boolean,
+            default: true
+        }
+    },
+    data() {
+        return {
+            search: '',
+            pagination: {
+                itemsPerPage: 50,
+                sortBy: [],
+                sortDesc: []
+            },
+            columns: [
+                {text: 'Nome', align: 'left', value: 'name'},
+                {text: 'Saldo', align: 'right', value: 'balance'},
+            ]
+        }
+    },
+    computed: {
+        total() {
+            return this.items.reduce((total, item) => total + item.balance, 0)
         }
     }
-
+}
 </script>
-
-<style scoped>
-</style>

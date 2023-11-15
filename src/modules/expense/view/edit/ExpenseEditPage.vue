@@ -55,8 +55,11 @@
                 if (!await this.$validator._base.validateAll()) {
                     return
                 }
+                this.enableLoading()
                 this.expense = await this.$store.dispatch(actionTypes.EXPENSE.SAVE, this.expense)
                 this.showSuccessNotification()
+
+                this.disableLoading()
                 this.redirectToListing()
             },
             async remove() {

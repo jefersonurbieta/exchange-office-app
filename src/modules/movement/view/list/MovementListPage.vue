@@ -49,6 +49,7 @@ import {
     import MovementFilter from './MovementFilter'
     import MovementToolbar from './MovementToolbar'
     import MovementDetail from './MovementDetail'
+import _ from "lodash";
 
     export default {
         components: {
@@ -73,19 +74,28 @@ import {
             }
         },
         async mounted() {
-            this.filter = this.$store.state.movement.filter
             await this.findAuxiliaryRecords()
-            await this.advancedSearch()
             this.loading = false
         },
         methods: {
             async findAuxiliaryRecords() {
-                this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL)
-                this.products = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL)
-                this.accounts = await this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL)
+                const promises = []
+
+                promises.push(this.$store.dispatch(actionTypes.USER.FIND_ALL))
+                promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL))
+                promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL))
+
+                await Promise.all(promises)
+                    .then((responses) => {
+                        this.users = responses[0]
+                        this.products = responses[1]
+                        this.accounts = responses[2]
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao fazer requisições:', error);
+                    });
             },
             async advancedSearch() {
-                this.loading = true
                 if (!this.managerUser()) {
                     this.filter.userId.value = this.$store.state.loki.user.id
                 }
@@ -97,9 +107,9 @@ import {
                     filter: this.filter,
                     pagination: this.$store.state.movement.pagination
                 })
+
                 this.totalItems = data.count
                 this.items = data.content
-                this.loading = false
             },
             resetTable() {
                 this.resetTableKey += 1
@@ -142,7 +152,7 @@ import {
                 this.showItemDetail = true
             },
             view(id) {
-                this.$router.push({name: routeTypes.MOVEMENT.EDIT, params: {id}})
+                this.$router.push({name: routeTypes.MOVEMENT.EDIT, params: {id}, query:{view: true}})
             },
             async print() {
                 const movement = this.itemDetail

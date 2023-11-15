@@ -66,7 +66,7 @@
         },
         methods: {
             async findAuxiliaryRecords() {
-                this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL)
+                this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL_TO_BALANCE)
                 this.userId = this.users[0].id
                 await this.findUserRecords()
             },
@@ -74,9 +74,20 @@
                 if (!await this.$validator._base.validateAll()) {
                     return
                 }
+                const promises = []
+                promises.push( this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {userId: this.userId, date: this.date}))
+                promises.push( this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPLETE, {userId: this.userId, date: this.date}))
+
                 this.loading = true
-                this.accounts = await this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {userId: this.userId, date: this.date})
-                this.products = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPLETE, {userId: this.userId, date: this.date})
+                await Promise.all(promises)
+                    .then((responses) => {
+                        this.accounts = responses[0]
+                        this.products = responses[1]
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao fazer requisições:', error);
+                    });
+
                 this.loading = false
             }
         }

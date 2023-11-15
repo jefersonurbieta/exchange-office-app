@@ -11,6 +11,7 @@ import ChangeCurrentCompany from './ChangeCurrentCompany'
 import TemplateDefault from './TemplateDefault'
 import Avatar from './Avatar'
 import BackButton from './BackButton'
+import Loading from './Loading'
 
 Vue.component('PageContainer', PageContainer)
 Vue.component('SearchRow', SearchRow)
@@ -24,3 +25,4 @@ Vue.component('ChangeCurrentCompany', ChangeCurrentCompany)
 Vue.component('TemplateDefault', TemplateDefault)
 Vue.component('Avatar', Avatar)
 Vue.component('BackButton', BackButton)
+Vue.component('Loading', Loading)

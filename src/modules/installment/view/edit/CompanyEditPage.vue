@@ -50,8 +50,12 @@ export default {
             if (!await this.$validator._base.validateAll()) {
                 return
             }
+            this.enableLoading()
+
             this.company = await this.$store.dispatch(actionTypes.COMPANY.SAVE, this.company)
             this.showSuccessNotification()
+
+            this.disableLoading()
             this.redirectToListing()
         },
         async cancel() {

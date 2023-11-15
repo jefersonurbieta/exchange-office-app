@@ -83,8 +83,6 @@
         async mounted() {
             this.filter = this.$store.state.closure.filter
             await this.findAuxiliaryRecords()
-            await this.advancedSearch()
-            this.loading = false
         },
         methods: {
             async findAuxiliaryRecords() {

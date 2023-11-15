@@ -60,6 +60,7 @@ export default {
     },
     USER: {
         FIND_ALL: 'USER.FIND_ALL',
+        FIND_ALL_TO_BALANCE: 'USER.FIND_ALL_TO_BALANCE',
         FIND_BY_ID: 'USER.FIND_BY_ID',
         SAVE: 'USER.SAVE',
     },

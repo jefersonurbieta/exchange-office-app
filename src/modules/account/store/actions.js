@@ -10,7 +10,10 @@ export default {
     },
 
     async [actionTypes.ACCOUNT.FIND_ALL_COMPLETE](context, query) {
-        if(query.date) {
+        if (!query) {
+            query = {}
+        }
+        if (query.date) {
             query.date = moment(query.date).format('DD-MM-yyyy')
         }
         const {data} = await Http.post('api/account/complete', query)

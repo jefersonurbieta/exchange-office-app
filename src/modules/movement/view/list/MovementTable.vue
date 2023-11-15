@@ -166,9 +166,9 @@
             targetName(item) {
                 if (item.type === movementTypes.PURCHASE_SALE) {
                     return item.customerName
-                } else if (item.type === movementTypes.TRANSFER && item.targetType === movementTargetTypes.ACCOUNT) {
+                } else if (item.type === movementTypes.TRANSFER && item.targetAccountId) {
                     return item.targetAccountName
-                } else if (item.type === movementTypes.TRANSFER && item.targetType === movementTargetTypes.PRODUCT) {
+                } else if (item.type === movementTypes.TRANSFER && item.targetUserId) {
                     return item.targetUserName
                 }
                 return ''
@@ -176,9 +176,9 @@
             targetIcon(item) {
                 if (item.type === movementTypes.PURCHASE_SALE && item.customerId) {
                     return 'supervisor_account'
-                } else if (item.type === movementTypes.TRANSFER && item.targetType === movementTargetTypes.ACCOUNT && item.targetAccountId) {
+                } else if (item.type === movementTypes.TRANSFER && item.targetAccountId) {
                     return 'fa-light fa-building-columns'
-                } else if (item.type === movementTypes.TRANSFER && item.targetType === movementTargetTypes.PRODUCT && item.targetUserId) {
+                } else if (item.type === movementTypes.TRANSFER && item.targetUserId) {
                     return 'person'
                 }
                 return ''

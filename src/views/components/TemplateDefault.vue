@@ -1,6 +1,6 @@
 <template>
     <v-app class="az-template-default">
-        <az-loading />
+        <loading />
 
         <az-aside>
             <div class="az-aside">

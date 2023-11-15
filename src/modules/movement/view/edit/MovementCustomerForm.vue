@@ -139,7 +139,7 @@
         },
         watch: {
             search(val) {
-                if (!val || val.length === 0) {
+                if (!val || val.length <= 3) {
                     this.entries = []
                     return
                 }

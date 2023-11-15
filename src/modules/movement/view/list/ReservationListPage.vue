@@ -76,7 +76,6 @@ export default {
     async mounted() {
         this.filter = this.$store.state.movement.reservationFilter
         await this.findAuxiliaryRecords()
-        await this.advancedSearch()
         this.loading = false
     },
     methods: {
@@ -84,16 +83,28 @@ export default {
             this.$router.push({name: routeTypes.RESERVATION.NEW})
         },
         async findAuxiliaryRecords() {
-            this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL)
-            this.products = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL)
-            this.accounts = await this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL)
+            const promises = []
+
+            promises.push(this.$store.dispatch(actionTypes.USER.FIND_ALL))
+            promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL))
+            promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL))
+
+            await Promise.all(promises)
+                .then((responses) => {
+                    this.users = responses[0]
+                    this.products = responses[1]
+                    this.accounts = responses[2]
+                })
+                .catch((error) => {
+                    console.error('Erro ao fazer requisições:', error);
+                });
         },
         async advancedSearch() {
-            this.loading = true
             if (!this.managerUser()) {
                 this.filter.userId.value = this.$store.state.loki.user.id
             }
             this.filter.status.value = statusTypes.RESERVED
+
             this.$store.commit(mutationTypes.MOVEMENT.SET_FILTER, this.filter)
 
             const data = await this.$store.dispatch(actionTypes.MOVEMENT.ADVANCED_SEARCH, {
@@ -102,7 +113,6 @@ export default {
             })
             this.totalItems = data.count
             this.items = data.content
-            this.loading = false
         },
         resetTable() {
             this.resetTableKey += 1

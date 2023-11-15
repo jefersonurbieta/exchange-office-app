@@ -58,8 +58,10 @@
                 if (!await this.$validator._base.validateAll()) {
                     return
                 }
+                this.enableLoading()
                 this.product = await this.$store.dispatch(actionTypes.PRODUCT.SAVE, this.product)
                 this.showSuccessNotification()
+                this.disableLoading()
                 this.redirectToListing()
             },
             async remove() {

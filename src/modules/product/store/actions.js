@@ -1,4 +1,4 @@
-import {actionTypes} from '@/core/constants'
+import {actionTypes, mutationTypes} from '@/core/constants'
 import Http from '@/core/utils/Http'
 import moment from 'moment'
 
@@ -28,11 +28,14 @@ export default {
     },
 
     async [actionTypes.PRODUCT.SAVE](context, item) {
+        context.commit(mutationTypes.LOKI.SET_GLOBAL_LOADING, true)
         if (item.id) {
             const {data} = await Http.put(`api/product/${item.id}`, item)
+            context.commit(mutationTypes.LOKI.SET_GLOBAL_LOADING, false)
             return data
         } else {
             const {data} = await Http.post('api/product', item)
+            context.commit(mutationTypes.LOKI.SET_GLOBAL_LOADING, false)
             return data
         }
     },

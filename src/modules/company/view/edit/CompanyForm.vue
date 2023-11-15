@@ -24,14 +24,11 @@
                         <v-text-field
                             v-model="value.receiptConfig.cnpj"
                             :disabled="!editable"
-                            :error-messages="errors.first('cnpj')"
                             maxlength="100"
                             name="cnpj"
-                            required
                             solo
                             flat
-                            shaped
-                            v-validate="'required'"/>
+                            shaped/>
                     </v-col>
 
                     <v-col cols="12" sm="6" v-if="value.id">

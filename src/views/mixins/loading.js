@@ -1,13 +1,14 @@
 import { mapMutations } from 'vuex'
 import { mutationTypes } from '@/core/constants'
+import store from '@/core/store'
 
 export default {
     methods: {
-        disableGlobalLoading() {
-            this.disableGlobalLoading()
+        disableLoading() {
+            store.commit(mutationTypes.LOKI.SET_GLOBAL_LOADING, false)
         },
-        enableGlobalLoading() {
-            this.enableGlobalLoading()
+        enableLoading() {
+            store.commit(mutationTypes.LOKI.SET_GLOBAL_LOADING, true)
         },
         setLoadingMessage(message) {
             this.setLoadingMessage(message)
