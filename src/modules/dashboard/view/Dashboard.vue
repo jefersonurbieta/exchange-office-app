@@ -16,7 +16,7 @@
                     mb-2/>
                 <dashboard-accounts
                     v-if="managerUser()"
-                    :items="companyProducts"
+                    :items="companyAccounts"
                     :loading="loading"
                     mb-2/>
             </v-flex>
@@ -28,7 +28,7 @@
 import DashboardAccounts from './DashboardAccounts'
 import DashboardStock from './DashboardStock'
 import DashboardMyStock from './DashboardMyStock'
-import {actionTypes} from "@/core/constants";
+import {actionTypes, statusTypes} from '@/core/constants'
 
 export default {
     components: {DashboardAccounts, DashboardStock, DashboardMyStock},
@@ -57,11 +57,11 @@ export default {
 
             await Promise.all(promises)
                 .then((responses) => {
-                    this.companyProducts = responses[0]
+                    this.companyProducts = responses[0].filter(entity => entity.status === statusTypes.ACTIVATED)
                     if (this.managerUser()) {
-                        this.companyAccounts = responses[1]
+                        this.companyAccounts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                     } else {
-                        this.userProducts = responses[1]
+                        this.userProducts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                     }
                 })
                 .catch((error) => {

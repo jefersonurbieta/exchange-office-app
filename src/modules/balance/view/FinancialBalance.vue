@@ -7,8 +7,8 @@
             :options="pagination"
             :search="search"
             :loading="loading">
-            <template v-slot:item.valor="{ item }">
-                {{ item.valor | real }}
+            <template v-slot:item.balance="{ item }">
+                {{ item.balance | real }}
             </template>
         </v-data-table>
     </container-card>

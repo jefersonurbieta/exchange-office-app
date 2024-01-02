@@ -1,6 +1,6 @@
 <template>
     <div class="az-loading">
-        <v-overlay :value="isLoading">
+        <v-overlay :value="isLoading" z-index="1000">
             <v-progress-circular indeterminate :size="100"></v-progress-circular>
         </v-overlay>
     </div>

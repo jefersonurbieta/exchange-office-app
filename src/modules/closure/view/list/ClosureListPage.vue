@@ -27,7 +27,8 @@
         <v-dialog
             v-model="alertNewItem"
             persistent
-            max-width="290">
+            max-width="290"
+        >
             <v-card>
                 <v-card-text class="pt-5">
                     Ao clicar em criar, o sistema irá realizar a transferência de todo o seu saldo de sua conta para conta da empresa
@@ -118,7 +119,10 @@
             },
             async create() {
                 try {
+                    this.enableLoading()
+                    this.alertNewItem = false
                     const data = await this.$store.dispatch(actionTypes.CLOSURE.SAVE)
+                    this.disableLoading()
                     await this.$router.push({
                         name: routeTypes.CLOSURE.EDIT,
                         params: {id: data.id}

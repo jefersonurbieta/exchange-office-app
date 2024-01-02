@@ -3,12 +3,12 @@
         <v-row class="search-row pt-5">
             <v-col cols="3">
                 <v-select
-                    v-model="userId"
+                    v-model="userName"
                     :error-messages="errors.first('Usuário')"
                     :items="users"
                     hide-details
                     item-text="name"
-                    item-value="id"
+                    item-value="name"
                     label="Usuário"
                     name="Usuário"
                     placeholder="Usuário"
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    import {actionTypes} from '@/core/constants'
+import {actionTypes, statusTypes} from '@/core/constants'
     import StockBalance from './StockBalance'
     import FinancialBalance from './FinancialBalance'
 
@@ -52,7 +52,7 @@
         data() {
             return {
                 loading: true,
-                userId: undefined,
+                userName: undefined,
                 date: new Date(),
                 user: {},
                 users: [],
@@ -67,7 +67,7 @@
         methods: {
             async findAuxiliaryRecords() {
                 this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL_TO_BALANCE)
-                this.userId = this.users[0].id
+                this.userName = this.users[0].name
                 await this.findUserRecords()
             },
             async findUserRecords() {
@@ -75,14 +75,15 @@
                     return
                 }
                 const promises = []
-                promises.push( this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {userId: this.userId, date: this.date}))
-                promises.push( this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPLETE, {userId: this.userId, date: this.date}))
+                const id = this.users.find(user => user.name === this.userName).id
+                promises.push( this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {userId: id, date: this.date, general: this.userName.substr(this.userName.length - 7) === "(Geral)"}))
+                promises.push( this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPLETE, {userId: id, date: this.date, general: this.userName.substr(this.userName.length - 7) === "(Geral)"}))
 
                 this.loading = true
                 await Promise.all(promises)
                     .then((responses) => {
-                        this.accounts = responses[0]
-                        this.products = responses[1]
+                        this.accounts = responses[0].filter(entity => entity.status === statusTypes.ACTIVATED)
+                        this.products = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                     })
                     .catch((error) => {
                         console.error('Erro ao fazer requisições:', error);

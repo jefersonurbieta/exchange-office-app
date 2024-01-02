@@ -22,8 +22,17 @@
                     clearable
                     no-filter
                 />
+
             </v-col>
             <v-col cols="12" md="8" v-if="!created && editable">
+                <v-btn
+                    class="mt-7"
+                    depressed
+                    shaped
+                    large
+                    @click="openDialog">
+                    Cadastrar novo cliente
+                </v-btn>
             </v-col>
 
             <v-col cols="12" md="4">
@@ -135,6 +144,9 @@
                 this.items.push(this.value.customer)
                 this.dialog = false
                 this.created = true
+            },
+            openDialog() {
+                this.dialog = true
             }
         },
         watch: {
