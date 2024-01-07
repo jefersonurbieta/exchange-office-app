@@ -60,13 +60,6 @@
                 },
                 columns: [
                     {
-                        text: 'Código',
-                        align: 'center',
-                        value: 'id',
-                        class: 'primary--text',
-                        width: '20%'
-                    },
-                    {
                         text: 'Data',
                         align: 'center',
                         value: 'createdAt',

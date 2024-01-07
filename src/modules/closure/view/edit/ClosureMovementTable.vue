@@ -64,7 +64,7 @@
                     {
                         text: 'Código',
                         align: 'center',
-                        value: 'id',
+                        value: 'code',
                         class: 'primary--text',
                         width: '1%'
                     },

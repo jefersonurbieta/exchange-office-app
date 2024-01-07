@@ -123,7 +123,7 @@ html, body, .application
         display none
 
 .az-logo .main
-    width 125px
+    width 180px
     transition all .2s linear
 
 .symbol

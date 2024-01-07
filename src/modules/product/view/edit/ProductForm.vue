@@ -57,7 +57,7 @@
 
                 <v-col cols="12" sm="6">
                     <field-label>Categoria</field-label>
-                    <v-combobox
+                    <v-autocomplete
                         v-model="value.category"
                         :disabled="!editable"
                         :items="categories"

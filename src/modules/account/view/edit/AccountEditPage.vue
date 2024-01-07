@@ -7,6 +7,7 @@
             @remove="remove"/>
 
         <account-form
+            v-show="!loading"
             v-model="account"
             :editable="editing || !account.id"/>
 
@@ -21,13 +22,15 @@
     import {actionTypes, routeTypes} from '@/core/constants'
     import AccountForm from './AccountForm'
     import _ from 'lodash'
+    import ExpenseForm from "@/modules/expense/view/edit/ExpenseForm.vue";
 
     export default {
-        components: {AccountForm},
+        components: {ExpenseForm, AccountForm},
         data() {
             return {
                 id: undefined,
                 editing: false,
+                loading: true,
                 account: {}
             }
         },
@@ -47,6 +50,7 @@
                 } else {
                     this.account = _.clone(this.$store.state.account.defaultObject)
                 }
+                this.loading = false
             },
             async save() {
                 if (!await this.$validator._base.validateAll()) {

@@ -9,10 +9,10 @@ import registerGlobalComponentsListener from './RegisterGlobalComponentsListener
 import interceptadorHttp from './InterceptadorHttp'
 
 export default {
-    setProductListener,
     searchLoggedUserListener,
     SearchCompanyListener,
     SearchCompaniesListener,
+    setProductListener,
     setTimezoneListener,
     setMenuAvatarListener,
     setLoadingMessageListener,

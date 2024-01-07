@@ -1,5 +1,5 @@
 <template>
-    <container-card class="mt-5 mb-5">
+    <container-card class="mt-5 mb-15">
         <v-row>
             <v-col cols="12" md="3" class="pt-3">
                 <field-label>Usuário</field-label>

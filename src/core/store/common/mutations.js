@@ -21,9 +21,9 @@ export default {
     [mutationTypes.COMMON.SET_PRODUCT](state, {packageJson}) {
         state.loki.product.id = 1
         state.loki.product.name = packageJson.name
-        state.loki.product.mainLogo = '/static/img/logo-colorido.png'
-        state.loki.product.symbolLogo = '/static/img/logo-reduzida.png'
-        state.loki.product.logoMobile = '/static/img/logo-colorido.png'
+        state.loki.product.mainLogo = '/static/img/logo/' + state.loggedCompany.brand?.brandImage?.trim()
+        state.loki.product.symbolLogo = '/static/img/logo/' + state.loggedCompany.brand?.reducedBrandImage?.trim()
+        state.loki.product.logoMobile = '/static/img/logo/' + state.loggedCompany.brand?.reducedBrandImage?.trim()
         state.loki.product.version = packageJson.version
         state.loki.product.logoutUrl = '/#/logout'
         state.loki.product.copywrite = 'Todos os direitos reservados'

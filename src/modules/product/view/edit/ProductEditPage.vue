@@ -7,6 +7,7 @@
             @remove="remove"/>
 
         <product-form
+            v-if="!loading"
             v-model="product"
             :categories="categories"
             :editable="editing || !product.id"/>
@@ -30,14 +31,14 @@
                 id: undefined,
                 editing: false,
                 product: _.clone(this.$store.state.product.defaultObject),
-                categories: []
+                categories: [],
+                loading: true
             }
         },
         async mounted() {
             this.id = this.$route.params.id
 
             await this.loadRecord()
-            await this.findAuxiliaryRecords()
             this.setEditing()
         },
         methods: {
@@ -45,14 +46,27 @@
                 this.editing = !this.id || this.managerUser()
             },
             async loadRecord() {
+                const promises = []
                 if (this.id) {
-                    this.product = await this.$store.dispatch(actionTypes.PRODUCT.FIND_BY_ID, this.id)
+                    promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_BY_ID, this.id))
                 } else {
                     this.product = _.clone(this.$store.state.product.defaultObject)
+                    promises.push(new Promise((resolve) => resolve()))
                 }
-            },
-            async findAuxiliaryRecords() {
-                this.categories = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_CATEGORIES)
+                promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_CATEGORIES))
+
+                await Promise.all(promises)
+                    .then((responses) => {
+                        if (this.id) {
+                            this.product = responses[0]
+                        }
+                        this.categories = responses[1]
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao fazer requisições:', error);
+                    });
+
+                this.loading = false
             },
             async save() {
                 if (!await this.$validator._base.validateAll()) {

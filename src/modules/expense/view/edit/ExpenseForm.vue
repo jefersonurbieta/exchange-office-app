@@ -39,6 +39,21 @@
                     v-model="value.date"/>
             </v-col>
 
+            <v-col cols="12" md="3">
+                <field-label>Conta</field-label>
+                <v-autocomplete
+                    v-model="value.accountId"
+                    :disabled="!editable || value.id"
+                    :items="accounts"
+                    item-text="name"
+                    item-value="id"
+                    name="Conta"
+                    placeholder="Ex: Dinheiro"
+                    solo
+                    flat
+                    shaped/>
+            </v-col>
+
             <v-col cols="12" sm="9">
                 <field-label>Descrição</field-label>
                 <v-text-field
@@ -65,6 +80,10 @@
             editable: {
                 type: Boolean,
                 default: false
+            },
+            accounts: {
+                type: Array,
+                default: () => []
             }
         }
     }

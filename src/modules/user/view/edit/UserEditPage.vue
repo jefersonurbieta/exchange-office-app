@@ -4,6 +4,7 @@
 
         <container-card class="mt-5">
             <user-form
+                v-show="!loading"
                 :editable="editing"
                 v-model="user"/>
         </container-card>
@@ -26,6 +27,7 @@
             return {
                 id: undefined,
                 editing: true,
+                loading: true,
                 user: {}
             }
         },
@@ -45,6 +47,7 @@
                 } else {
                     this.user = _.clone(this.$store.state.user.defaultObject)
                 }
+                this.loading = false
             },
             async save() {
                 if (!await this.$validator._base.validateAll()) {

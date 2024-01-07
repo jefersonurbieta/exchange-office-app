@@ -7,8 +7,9 @@
             @remove="remove"/>
 
         <expense-form
-            v-if="!loading"
+            v-show="!loading"
             v-model="expense"
+            :accounts="accounts"
             :editable="editing || !expense.id"/>
 
         <form-buttons
@@ -22,15 +23,17 @@
     import {actionTypes, routeTypes} from '@/core/constants'
     import ExpenseForm from './ExpenseForm'
     import _ from 'lodash'
+    import MovementAccountForm from "@/modules/movement/view/edit/MovementAccountForm.vue";
 
     export default {
-        components: {ExpenseForm},
+        components: {MovementAccountForm, ExpenseForm},
         data() {
             return {
                 id: undefined,
                 editing: false,
                 loading: true,
-                expense: {}
+                expense: {},
+                accounts: [],
             }
         },
         async mounted() {
@@ -44,11 +47,26 @@
                 this.editing = !this.id || this.managerUser()
             },
             async loadRecord() {
+                const promises = []
                 if (this.id) {
-                    this.expense = await this.$store.dispatch(actionTypes.EXPENSE.FIND_BY_ID, this.id)
+                    promises.push(this.$store.dispatch(actionTypes.EXPENSE.FIND_BY_ID, this.id))
                 } else {
                     this.expense = _.clone(this.$store.state.expense.defaultObject)
+                    promises.push(new Promise((resolve) => resolve()))
                 }
+                promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE))
+
+                await Promise.all(promises)
+                    .then((responses) => {
+                        if (this.id) {
+                            this.expense = responses[0]
+                        }
+                        this.accounts = responses[1]
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao fazer requisições:', error);
+                    });
+
                 this.loading = false
             },
             async save() {
