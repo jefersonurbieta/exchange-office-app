@@ -8,6 +8,7 @@
                 shaped
                 :outlined="types.indexOf(movementTypes.PURCHASE_SALE) == -1"
                 :color="types.indexOf(movementTypes.PURCHASE_SALE) >= 0 ? 'primary' : ''"
+                :class="{ 'font-color-white': types.indexOf(movementTypes.PURCHASE_SALE) >= 0 }"
                 @click="changeMovementType(movementTypes.PURCHASE_SALE)">
                 Compra/Venda
             </v-btn>
@@ -17,7 +18,8 @@
                 rounded
                 shaped
                 :outlined="types.indexOf(movementTypes.TRANSFER) == -1"
-                :color="types.indexOf(movementTypes.TRANSFER) >= 0 ? 'primary' : ''"
+                :color="types.indexOf(movementTypes.TRANSFER) >= 0 ? '#2EB0AA' : ''"
+                :class="{ 'font-color-white': types.indexOf(movementTypes.TRANSFER) >= 0 }"
                 @click="changeMovementType(movementTypes.TRANSFER)">
                 Transferência
             </v-btn>
@@ -27,7 +29,8 @@
                 rounded
                 shaped
                 :outlined="types.indexOf(movementTypes.INPUT) == -1"
-                :color="types.indexOf(movementTypes.INPUT) >= 0 ? 'primary' : ''"
+                :color="types.indexOf(movementTypes.INPUT) >= 0 ? 'accent' : ''"
+                :class="{ 'font-color-white': types.indexOf(movementTypes.INPUT) >= 0 }"
                 @click="changeMovementType(movementTypes.INPUT)">
                 Entrada
             </v-btn>
@@ -37,7 +40,8 @@
                 rounded
                 shaped
                 :outlined="types.indexOf(movementTypes.OUTPUT) == -1"
-                :color="types.indexOf(movementTypes.OUTPUT)  >= 0 ? 'primary' : ''"
+                :color="types.indexOf(movementTypes.OUTPUT)  >= 0 ? '#E82C0C' : ''"
+                :class="{ 'font-color-white': types.indexOf(movementTypes.OUTPUT) >= 0 }"
                 @click="changeMovementType(movementTypes.OUTPUT)">
                 Saida
             </v-btn>
@@ -56,21 +60,22 @@
             filter: {
                 type: Object
             },
-        },
-        data() {
-            return {
-                types: []
+            types: {
+                type: Array
             }
         },
         methods: {
             changeMovementType(value) {
+                let typesLocal = []
                 if (this.types.indexOf(value) >= 0) {
-                    this.types = this.types.filter(type => type !== value)
+                    typesLocal = this.types.filter(type => type !== value)
                 } else {
-                    this.types.push(value)
+                    if(this.filter.types.value)
+                        typesLocal = this.filter.types.value
+
+                    typesLocal.push(value)
                 }
-                this.filter.types.value = this.types
-                this.$emit('advancedSearch')
+                this.$emit('advancedSearch', typesLocal)
             }
         }
     }
@@ -85,4 +90,7 @@
 
     .totalizador-ativado:before
         opacity 0.24 !important
+
+.font-color-white
+    color white !important
 </style>

@@ -39,7 +39,7 @@
         },
         methods: {
             setEditing() {
-                this.editing = !this.id || this.managerUser()
+                this.editing = true
             },
             async loadRecord() {
                 if (this.id) {

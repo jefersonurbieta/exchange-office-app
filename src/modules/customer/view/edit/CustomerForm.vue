@@ -28,8 +28,8 @@
                         maxlength="100"
                         name="Email"
                         placeholder="Ex. geovanna@email.com"
-                        required
-                        v-validate="'required'"
+                        :required="!reservation"
+                        v-validate="reservation ? '' : 'required'"
                         solo
                         flat
                         shaped/>
@@ -99,8 +99,8 @@
                         maxlength="15"
                         name="Telefone"
                         placeholder="(00) 00000-0000"
-                        required
-                        v-validate="'required'"
+                        :required="!reservation"
+                        v-validate="reservation ? '' : 'required'"
                         solo
                         flat
                         shaped/>
@@ -133,9 +133,8 @@
             </v-row>
 
         </container-card>
-        <container-card class="mt-5" title="Endereço">
+        <container-card class="mt-15 mb-10" title="Endereço">
             <v-row>
-
                 <v-col cols="12" md="4" sm="6" xs="12">
                     <field-label>CEP</field-label>
                     <v-text-field
@@ -279,6 +278,10 @@
                 required: true
             },
             editable: {
+                type: Boolean,
+                default: false
+            },
+            reservation: {
                 type: Boolean,
                 default: false
             }

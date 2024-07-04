@@ -23,6 +23,11 @@ export default {
         return data
     },
 
+    async [actionTypes.MOVEMENT.CANCEL](context, id) {
+        const {data} = await Http.put(`api/movement/${id}/cancel`)
+        return data
+    },
+
     async [actionTypes.MOVEMENT.ADVANCED_SEARCH](context, {filter, pagination}) {
         const filterToSend = {}
         for (let [key] of Object.entries(filter)) {

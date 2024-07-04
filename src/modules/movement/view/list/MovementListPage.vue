@@ -2,7 +2,8 @@
     <page-container class="operacaoBusca">
         <movement-toolbar
             :filter="filter"
-            @advancedSearch="resetTable">
+            :types="types"
+            @advancedSearch="searchForToolbar">
             <movement-filter
                 v-if="!loading"
                 :filter="filter"
@@ -60,6 +61,7 @@ import _ from "lodash";
         },
         data() {
             return {
+                types: [],
                 users: [],
                 products: [],
                 accounts: [],
@@ -110,6 +112,11 @@ import _ from "lodash";
 
                 this.totalItems = data.count
                 this.items = data.content
+            },
+            searchForToolbar(typesLocal) {
+                this.types = typesLocal
+                this.filter.types.value = typesLocal
+                this.resetTable()
             },
             resetTable() {
                 this.resetTableKey += 1
@@ -175,6 +182,7 @@ import _ from "lodash";
                 this.$store.commit(mutationTypes.MOVEMENT.SET_FILTER, this.$store.state.movement.defaultFilter)
                 this.filter = this.$store.state.movement.filter
                 this.resetTable()
+                this.types = []
             }
         }
     }

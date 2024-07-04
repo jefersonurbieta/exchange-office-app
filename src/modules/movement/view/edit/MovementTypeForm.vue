@@ -75,6 +75,17 @@
                     @click="changeMovementTargetType(movementTargetTypes.ACCOUNT)">
                     Conta
                 </v-btn>
+                <v-btn
+                    v-if="(!value.id || value.targetType === movementTargetTypes.ACCOUNT_TO_ACCOUNT) && value.type === movementTypes.TRANSFER"
+                    depressed
+                    class="mr-2"
+                    rounded
+                    shaped
+                    :disabled="value.id != null"
+                    :color="value.targetType === movementTargetTypes.ACCOUNT_TO_ACCOUNT ? 'primary' : ''"
+                    @click="changeMovementTargetType(movementTargetTypes.ACCOUNT_TO_ACCOUNT)">
+                    Conta para conta
+                </v-btn>
             </v-col>
         </v-row>
     </container-card>

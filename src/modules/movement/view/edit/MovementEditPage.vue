@@ -31,9 +31,10 @@
                 :editable="editing"/>
 
             <movement-account-form
-                v-if="!loading && movement.type !== movementTypes.PURCHASE_SALE && movement.targetType === movementTargetTypes.ACCOUNT"
+                v-if="!loading && movement.type !== movementTypes.PURCHASE_SALE && (movement.targetType === movementTargetTypes.ACCOUNT || movement.targetType === movementTargetTypes.ACCOUNT_TO_ACCOUNT )"
                 v-model="movement"
                 :accounts="accounts"
+                :users="users"
                 :editable="editing"/>
 
             <movement-product-form

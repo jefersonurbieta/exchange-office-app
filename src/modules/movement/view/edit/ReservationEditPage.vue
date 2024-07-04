@@ -23,7 +23,8 @@
                 v-if="!loading && movement.type === movementTypes.PURCHASE_SALE"
                 v-model="movement"
                 :customers="customers"
-                :editable="editing"/>
+                :editable="editing"
+                :reservation="editing"/>
 
             <movement-account-form
                 v-if="!loading && movement.type !== movementTypes.PURCHASE_SALE && movement.targetType === movementTargetTypes.ACCOUNT"
@@ -92,8 +93,7 @@ export default {
     async mounted() {
         this.id = this.$route.params.id
 
-        await this.loadRecord()
-        await this.findAuxiliaryRecords()
+        await this.findAuxiliaryRecordsPromise()
         await this.loadObjectsInRegistry()
 
         this.loading = false
@@ -121,6 +121,32 @@ export default {
             this.accounts = await this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL)
             this.products = await this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPANY)
             this.users = await this.$store.dispatch(actionTypes.USER.FIND_ALL)
+        },
+        async findAuxiliaryRecordsPromise() {
+            const promises = []
+            if (this.id) {
+                promises.push(this.$store.dispatch(actionTypes.MOVEMENT.FIND_BY_ID, this.id))
+            } else {
+                this.movement = _.clone(this.$store.state.movement.reservationDefaultObject)
+                promises.push(new Promise((resolve) => resolve()))
+            }
+
+            promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL))
+            promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPANY))
+            promises.push(this.$store.dispatch(actionTypes.USER.FIND_ALL))
+
+            await Promise.all(promises)
+                .then((responses) => {
+                    if (this.id) {
+                        this.movement = responses[0]
+                    }
+                    this.accounts = responses[1]
+                    this.products = responses[2]
+                    this.users = responses[3]
+                })
+                .catch((error) => {
+                    console.error('Erro ao fazer requisições:', error);
+                });
         },
         async loadObjectsInRegistry() {
             if (this.movement.customerId) {
@@ -210,8 +236,10 @@ export default {
         changedValues(value) {
             this.movement = value
         },
-        cancel() {
-            this.loadRecord()
+        async cancel() {
+            const movementSaved = await this.$store.dispatch(actionTypes.MOVEMENT.CANCEL, this.movement.id)
+            this.showSuccessNotification()
+            this.redirectToListing(movementSaved)
         },
         print() {
             this.$store.dispatch(actionTypes.MOVEMENT.PRINT, {

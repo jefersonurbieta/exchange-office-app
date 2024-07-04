@@ -109,7 +109,8 @@
                     prefix=""
                     :precision="value.product ? value.product.quantityDecimalPlacesAmount : 0"
                     required
-                    v-validate="'required'"/>
+                    v-validate="'required'"
+                    @input="calcValues"/>
                 <field-view
                     v-if="!editable"
                     :text="value.amount | value(value.product.quantityDecimalPlacesAmount)"/>

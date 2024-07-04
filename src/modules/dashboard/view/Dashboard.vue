@@ -11,11 +11,10 @@
             <v-flex md5 sm12>
                 <dashboard-my-stock
                     v-if="!managerUser()"
+                    class="mb-10"
                     :items="userProducts"
-                    :loading="loading"
-                    mb-2/>
+                    :loading="loading"/>
                 <dashboard-accounts
-                    v-if="managerUser()"
                     :items="companyAccounts"
                     :loading="loading"
                     mb-2/>
@@ -52,6 +51,7 @@ export default {
             if (this.managerUser()) {
                 promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {general: true}))
             } else {
+                promises.push(this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {userId: this.$store.state.loggedUser.id}))
                 promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPLETE, {userId: this.$store.state.loggedUser.id}))
             }
 
@@ -61,6 +61,7 @@ export default {
                     if (this.managerUser()) {
                         this.companyAccounts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                     } else {
+                        this.companyAccounts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                         this.userProducts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                     }
                 })

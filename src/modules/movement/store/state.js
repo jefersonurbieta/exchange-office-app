@@ -34,12 +34,12 @@ export default {
         },
         status: {
             value: null,
-            default: [],
+            default: null,
             label: 'Situação de movimentação'
         },
         notStatus: {
             value: null,
-            default: [],
+            default: null,
             label: 'Situação de movimentação'
         },
         targetType: {
@@ -101,12 +101,12 @@ export default {
         },
         status: {
             value: null,
-            default: [],
+            default: null,
             label: 'Situação de movimentação'
         },
         notStatus: {
             value: null,
-            default: [],
+            default: null,
             label: 'Situação de movimentação'
         },
         targetType: {

@@ -14,12 +14,12 @@
                 {{ item.createdAt | datetime }}
             </template>
             <template v-slot:item.type="{ item }">
-                <v-chip :color="colorByType(item)" small outlined>
+                <v-chip :color="colorByType(item)" small class="font-color-white">
                     {{ typeName(item) }}
                 </v-chip>
             </template>
             <template v-slot:item.target="{ item }">
-                <v-icon :color="colorByType(item)" small>{{ targetIcon(item) }}</v-icon>
+                <v-icon :color="colorByType(item)" small variant="flat">{{ targetIcon(item) }}</v-icon>
                 {{ targetName(item) }}
             </template>
             <template v-slot:item.amount="{ item }">
@@ -79,16 +79,16 @@
                 },
                 columns: [
                     {
-                        text: 'Data',
+                        text: 'Operação',
                         align: 'center',
-                        value: 'createdAt',
+                        value: 'type',
                         class: 'primary--text',
                         width: '1%'
                     },
                     {
-                        text: 'Operação',
+                        text: 'Data',
                         align: 'center',
-                        value: 'type',
+                        value: 'createdAt',
                         class: 'primary--text',
                         width: '1%'
                     },
@@ -270,5 +270,6 @@ tfoot
 .v-chip .v-chip__content
     padding 0 5px !important
 
-
+.font-color-white
+    color white !important
 </style>

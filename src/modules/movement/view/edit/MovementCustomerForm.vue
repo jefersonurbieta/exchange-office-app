@@ -66,7 +66,8 @@
                     <container-card title="Cliente">
                         <customer-form
                             v-model="localCustomer"
-                            :editable="true"/>
+                            :editable="true"
+                            :reservation="reservation"/>
 
                         <v-row justify="center" class="mb-8">
                             <v-spacer></v-spacer>
@@ -102,6 +103,10 @@
             customers: {
                 type: Array,
                 default: () => []
+            },
+            reservation: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -135,7 +140,9 @@
                 }
             },
             async save() {
-                if (!this.localCustomer.name || !this.localCustomer.email || !this.localCustomer.phone) {
+                if (!this.localCustomer.name
+                    || (!this.reservation && !this.localCustomer.email)
+                    || (!this.reservation && !this.localCustomer.phone)) {
                     await this.$validator._base.validateAll()
                     return
                 }
