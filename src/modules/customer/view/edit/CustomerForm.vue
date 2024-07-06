@@ -300,7 +300,6 @@
             findZipCodeInCorreios() {
                 if (this.value.zipCode.length === 9) {
                     this.loader = true
-                    this.setMensagemLoading('Buscando CEP...')
                     this.$store.dispatch(actionTypes.CUSTOMER.FIND_ZIP_CODE, this.value.zipCode).then((response) => {
                         this.value.street = response.logradouro
                         this.value.complement = response.complemento
@@ -308,7 +307,7 @@
 
                         this.value.country = this.paises.find(obj => obj.nome_pais === 'Brasil').nome_pais
                         this.estadoSelecionado = this.estados.find(obj => obj.sigla === response.uf)
-                        this.value.state = response.bairro
+                        this.stateChanged()
                         this.value.city = response.localidade
                     })
                 }

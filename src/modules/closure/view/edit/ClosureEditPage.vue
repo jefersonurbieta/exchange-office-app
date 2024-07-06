@@ -21,6 +21,8 @@
                 </v-col>
             </v-row>
 
+            <div class="mb-15"></div>
+
             <closure-movement-table
                 class="mt-5 mb-5"
                 :items="closureMovements"

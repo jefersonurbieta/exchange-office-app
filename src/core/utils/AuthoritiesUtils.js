@@ -4,8 +4,31 @@ export default class AuthoritiesUtils {
 
     static authoritiesByRole(role) {
         switch (role) {
+            case rolesTypes.OWNER:
+                return [
+                    {
+                        name: rolesTypes.OWNER,
+                        hasAccess: true
+                    },
+                    {
+                        name: rolesTypes.MANAGER,
+                        hasAccess: true
+                    },
+                    {
+                        name: rolesTypes.ADMIN,
+                        hasAccess: false
+                    },
+                    {
+                        name: rolesTypes.OPERATOR,
+                        hasAccess: true
+                    }
+                ]
             case rolesTypes.MANAGER:
                 return [
+                    {
+                        name: rolesTypes.OWNER,
+                        hasAccess: false
+                    },
                     {
                         name: rolesTypes.MANAGER,
                         hasAccess: true
@@ -22,6 +45,10 @@ export default class AuthoritiesUtils {
             case rolesTypes.ADMIN:
                 return [
                     {
+                        name: rolesTypes.OWNER,
+                        hasAccess: true
+                    },
+                    {
                         name: rolesTypes.MANAGER,
                         hasAccess: true
                     },
@@ -36,6 +63,10 @@ export default class AuthoritiesUtils {
                 ]
             default:
                 return [
+                    {
+                        name: rolesTypes.OWNER,
+                        hasAccess: false
+                    },
                     {
                         name: rolesTypes.MANAGER,
                         hasAccess: false
@@ -57,7 +88,7 @@ export default class AuthoritiesUtils {
     }
 
     static userHasManagerRole(user) {
-        return user.role === rolesTypes.MANAGER || user.role === rolesTypes.ADMIN
+        return user.role === rolesTypes.MANAGER || user.role === rolesTypes.OWNER || user.role === rolesTypes.ADMIN
     }
 
     static userHasOperatorRole(user) {

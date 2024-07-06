@@ -51,15 +51,8 @@ export default {
     async [actionTypes.CUSTOMER.FIND_ZIP_CODE](context, cep) {
         const cepNumeral = cep.replace(/[^0-9]/g, '')
 
-        const linkConsulta = 'https://viacep.com.br/ws/' + cepNumeral + '/json/'
-
-        delete Http.defaults.headers.common['X-Requested-With']
-        Http.defaults.withCredentials = false
-
-        const {data} = await Http.get(linkConsulta)
-
-        Http.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
-        Http.defaults.withCredentials = true
+        const linkQuery = `https://viacep.com.br/ws/${cepNumeral}/json`
+        const {data} = await Http.get(linkQuery)
 
         return data
     },

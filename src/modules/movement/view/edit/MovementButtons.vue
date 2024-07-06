@@ -26,7 +26,6 @@
                 depressed
                 color="error"
                 shaped
-                plain
                 large
                 v-if="editable"
                 @click="$emit('cancel')">
@@ -35,7 +34,7 @@
             <v-btn
                 class="mr-2"
                 depressed
-                color="primary"
+                color="warning"
                 shaped
                 large
                 v-if="showPrint"

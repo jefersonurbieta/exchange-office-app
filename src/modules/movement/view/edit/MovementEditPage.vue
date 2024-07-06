@@ -34,6 +34,7 @@
                 v-if="!loading && movement.type !== movementTypes.PURCHASE_SALE && (movement.targetType === movementTargetTypes.ACCOUNT || movement.targetType === movementTargetTypes.ACCOUNT_TO_ACCOUNT )"
                 v-model="movement"
                 :accounts="accounts"
+                :accountsInternal="accountsInternal"
                 :users="users"
                 :editable="editing"/>
 
@@ -42,6 +43,7 @@
                 v-model="movement"
                 :editable="editing"
                 :products="products"
+                :productsInternal="productsInternal"
                 :users="users"/>
 
             <movement-description-form
@@ -92,6 +94,8 @@ export default {
             customers: [],
             accounts: [],
             products: [],
+            accountsInternal: [],
+            productsInternal: [],
             users: [],
             valid: true
         }
@@ -152,6 +156,11 @@ export default {
             promises.push(this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPANY))
             promises.push(this.$store.dispatch(actionTypes.USER.FIND_ALL))
 
+            if(this.managerUser()) {
+                promises.push( this.$store.dispatch(actionTypes.ACCOUNT.FIND_ALL_COMPLETE, {userId: this.$store.state.loggedCompany.userId, general: false}))
+                promises.push( this.$store.dispatch(actionTypes.PRODUCT.FIND_ALL_COMPLETE, {userId: this.$store.state.loggedCompany.userId, general: false}))
+            }
+
             await Promise.all(promises)
                 .then((responses) => {
                     if (this.id) {
@@ -160,6 +169,11 @@ export default {
                     this.accounts = responses[1]
                     this.products = responses[2]
                     this.users = responses[3]
+
+                    if(this.managerUser()) {
+                        this.accountsInternal = responses[4]
+                        this.productsInternal = responses[5]
+                    }
                 })
                 .catch((error) => {
                     console.error('Erro ao fazer requisições:', error);

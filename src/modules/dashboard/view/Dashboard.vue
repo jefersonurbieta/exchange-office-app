@@ -62,7 +62,7 @@ export default {
                         this.companyAccounts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
                     } else {
                         this.companyAccounts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
-                        this.userProducts = responses[1].filter(entity => entity.status === statusTypes.ACTIVATED)
+                        this.userProducts = responses[2].filter(entity => entity.status === statusTypes.ACTIVATED)
                     }
                 })
                 .catch((error) => {

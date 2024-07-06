@@ -1,5 +1,6 @@
 import {actionTypes} from '@/core/constants'
 import Http from '@/core/utils/Http'
+import moment from 'moment'
 
 export default {
 
@@ -32,7 +33,13 @@ export default {
         const filterToSend = {}
         for (let [key] of Object.entries(filter)) {
             if (filter[key] && filter[key].value) {
-                filterToSend[key] = filter[key].value
+                if(key === 'startDate' || key === 'endDate') {
+                    console.log(filter[key].value)
+                    console.log(moment(filter[key].value).format('yyyy-MM-DD'))
+                    filterToSend[key] = moment(filter[key].value).format('yyyy-MM-DD');
+                } else {
+                    filterToSend[key] = filter[key].value
+                }
             }
         }
 

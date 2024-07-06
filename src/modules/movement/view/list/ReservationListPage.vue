@@ -26,15 +26,6 @@
             @click:row="clickItem"
             @changePage="advancedSearch"
             @view="view"/>
-
-        <movement-detail
-            :show="showItemDetail"
-            :item="itemDetail"
-            @close="showItemDetail = false"
-            @view="view"
-            @edit="edit"
-            @remove="remove"
-            @print="print"/>
     </page-container>
 </template>
 
@@ -50,13 +41,11 @@ import {
 } from '@/core/constants'
 import MovementTable from './MovementTable'
 import MovementFilter from './MovementFilter'
-import MovementDetail from './MovementDetail'
 
 export default {
     components: {
         MovementTable,
-        MovementFilter,
-        MovementDetail
+        MovementFilter
     },
     data() {
         return {
@@ -151,8 +140,7 @@ export default {
             this.showSuccessNotification()
         },
         clickItem(item) {
-            this.itemDetail = item
-            this.showItemDetail = true
+            this.view(item.id)
         },
         view(id) {
             this.$router.push({name: routeTypes.RESERVATION.EDIT, params: {id}})

@@ -7,7 +7,7 @@
                     v-if="editable"
                     v-model="value.account"
                     :error-messages="errors.first('Conta')"
-                    :items="accounts"
+                    :items="accountsToUse"
                     class="required"
                     item-text="name"
                     name="Conta"
@@ -26,7 +26,7 @@
 
             <v-col cols="12" md="4" v-if="editable">
                 <field-label>Valor disponível</field-label>
-                <field-view v-if="value.account" :text="value.account.value"/>
+                <field-view v-if="value.account" :text="value.account.balance | real"/>
                 <field-view v-if="!value.account" :text="defaultText"/>
             </v-col>
 
@@ -98,7 +98,7 @@
 
 <script>
 
-    import {rolesTypes} from "@/core/constants";
+import {movementTargetTypes, movementTypes, rolesTypes} from "@/core/constants";
 
     export default {
         inject: ['$validator'],
@@ -112,6 +112,10 @@
                 default: false
             },
             accounts: {
+                type: Array,
+                default: () => []
+            },
+            accountsInternal: {
                 type: Array,
                 default: () => []
             },
@@ -133,7 +137,18 @@
             targetUsers() {
                 return this.users.filter(obj => obj.id !== this.$store.state.loki.user.id
                     && obj.role !== rolesTypes.MANAGER
+                    && obj.role !== rolesTypes.OWNER
                     && obj.role !== rolesTypes.ADMIN)
+            },
+            accountsToUse() {
+                if(
+                    this.managerUser()
+                    && this.value.type === movementTypes.TRANSFER
+                    && this.value.targetType === movementTargetTypes.ACCOUNT
+                ) {
+                    return this.accountsInternal
+                }
+                return this.accounts
             }
         },
         methods: {

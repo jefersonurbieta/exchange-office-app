@@ -7,7 +7,7 @@
                     v-if="editable"
                     v-model="value.product"
                     :error-messages="errors.first('Produto')"
-                    :items="products"
+                    :items="productsToUse"
                     class="required"
                     item-text="name"
                     name="Produto"
@@ -93,7 +93,7 @@
 
 <script>
 
-    import {rolesTypes} from '@/core/constants'
+import {movementTargetTypes, movementTypes, rolesTypes} from '@/core/constants'
 
     export default {
         inject: ['$validator'],
@@ -113,6 +113,10 @@
             products: {
                 type: Array,
                 default: () => []
+            },
+            productsInternal: {
+                type: Array,
+                default: () => []
             }
         },
         computed: {
@@ -120,6 +124,16 @@
                 return this.users.filter(obj => obj.id !== this.$store.state.loki.user.id
                     && obj.role !== rolesTypes.MANAGER
                     && obj.role !== rolesTypes.ADMIN)
+            },
+            productsToUse() {
+                if(
+                    this.managerUser()
+                    && this.value.type === movementTypes.TRANSFER
+                    && this.value.targetType === movementTargetTypes.PRODUCT
+                ) {
+                    return this.productsInternal
+                }
+                return this.products
             }
         },
         methods: {

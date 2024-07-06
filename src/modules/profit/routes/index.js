@@ -15,7 +15,7 @@ export default [
                 title: 'Lucro',
                 subtitle: 'Informações sobre o lucro obtido'
             },
-            authorities: [rolesTypes.MANAGER]
+            authorities: [rolesTypes.OWNER]
         }
     },
 ]

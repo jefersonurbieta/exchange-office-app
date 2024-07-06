@@ -46,11 +46,10 @@ import {
     mutationTypes,
     routeTypes, statusTypes
 } from '@/core/constants'
-    import MovementTable from './MovementTable'
-    import MovementFilter from './MovementFilter'
-    import MovementToolbar from './MovementToolbar'
-    import MovementDetail from './MovementDetail'
-import _ from "lodash";
+import MovementTable from './MovementTable'
+import MovementFilter from './MovementFilter'
+import MovementToolbar from './MovementToolbar'
+import MovementDetail from './MovementDetail'
 
     export default {
         components: {
