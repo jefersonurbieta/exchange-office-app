@@ -7,6 +7,12 @@
             <template v-slot:item.amount="{ item }">
                 {{ item.amount | real }}
             </template>
+            <template v-slot:item.sale="{ item }">
+                {{ item.sale | real }}
+            </template>
+            <template v-slot:item.purchase="{ item }">
+                {{ item.purchase | real }}
+            </template>
         </v-data-table>
     </az-container>
 </template>
@@ -28,6 +34,18 @@ export default {
                     text: 'Valor',
                     align: 'right',
                     value: 'amount',
+                    class: 'primary--text'
+                },
+                {
+                    text: 'Venda',
+                    align: 'right',
+                    value: 'sale',
+                    class: 'primary--text'
+                },
+                {
+                    text: 'Compra',
+                    align: 'right',
+                    value: 'purchase',
                     class: 'primary--text'
                 }
             ],
