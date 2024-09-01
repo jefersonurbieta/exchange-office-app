@@ -36,7 +36,7 @@
                 <field-date
                     isRequired
                     name-date="Data"
-                    v-model="value.date"/>
+                    v-model="value.dateForm"/>
             </v-col>
 
             <v-col cols="12" md="3">

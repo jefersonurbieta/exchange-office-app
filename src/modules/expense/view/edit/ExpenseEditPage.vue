@@ -23,10 +23,9 @@
     import {actionTypes, routeTypes} from '@/core/constants'
     import ExpenseForm from './ExpenseForm'
     import _ from 'lodash'
-    import MovementAccountForm from "@/modules/movement/view/edit/MovementAccountForm.vue";
 
     export default {
-        components: {MovementAccountForm, ExpenseForm},
+        components: {ExpenseForm},
         data() {
             return {
                 id: undefined,
@@ -60,6 +59,7 @@
                     .then((responses) => {
                         if (this.id) {
                             this.expense = responses[0]
+                            this.expense.dateForm = this.expense.date
                         }
                         this.accounts = responses[1]
                     })

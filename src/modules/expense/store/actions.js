@@ -23,8 +23,8 @@ export default {
     },
 
     async [actionTypes.EXPENSE.SAVE](context, item) {
-        if(item.date) {
-            item.date = moment(item.date).format('DD-MM-yyyy')
+        if(item.dateForm) {
+            item.date = moment(item.dateForm).format('DD-MM-yyyy')
         }
         if (item.id) {
             const {data} = await Http.put(`api/expense/${item.id}`, item)
