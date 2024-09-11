@@ -97,7 +97,7 @@ import MovementDetail from './MovementDetail'
                     });
             },
             async advancedSearch() {
-                if (!this.managerUser()) {
+                if (!this.managerUserView()) {
                     this.filter.userId.value = this.$store.state.loki.user.id
                 }
                 this.filter.notStatus.value = statusTypes.RESERVED

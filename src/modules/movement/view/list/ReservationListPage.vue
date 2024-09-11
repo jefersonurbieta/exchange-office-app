@@ -89,7 +89,7 @@ export default {
                 });
         },
         async advancedSearch() {
-            if (!this.managerUser()) {
+            if (!this.managerUserView()) {
                 this.filter.userId.value = this.$store.state.loki.user.id
             }
             this.filter.status.value = statusTypes.RESERVED

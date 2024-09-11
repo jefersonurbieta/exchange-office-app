@@ -8,6 +8,9 @@ export default {
         managerUser() {
             return AuthoritiesUtils.userHasManagerRole(this.$store.state.loki.user)
         },
+        managerUserView() {
+            return AuthoritiesUtils.userHasManagerRoleView(this.$store.state.loki.user)
+        },
         operatorUser() {
             return AuthoritiesUtils.userHasOperatorRole(this.$store.state.loki.user)
         }

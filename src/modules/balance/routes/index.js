@@ -16,7 +16,7 @@ export default [
                 title: 'Caixa',
                 subtitle: 'Dados do caixa dos operadores'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER, rolesTypes.MANAGER_VIEW]
         }
     },
 ]

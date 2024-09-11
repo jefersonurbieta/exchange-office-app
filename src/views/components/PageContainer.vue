@@ -1,6 +1,6 @@
 <template>
     <div class="page-container">
-        <div v-if="!managerView || managerUser()">
+        <div v-if="!managerView || managerUserView()">
             <slot/>
         </div>
     </div>

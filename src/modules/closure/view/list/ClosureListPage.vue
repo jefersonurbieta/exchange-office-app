@@ -2,7 +2,7 @@
     <page-container class="closureBusca">
         <search-row
             v-model="search"
-            :showNew="true"
+            :showNew="!managerUserView()"
             :advancedSearch="true"
             @new="newEvent()">
             <closure-filter
@@ -91,7 +91,7 @@
             },
             async advancedSearch() {
                 this.loading = true
-                if (!this.managerUser()) {
+                if (!this.managerUserView()) {
                     this.filter.userId.value = this.$store.state.loki.user.id
                 }
 

@@ -15,6 +15,10 @@ export default class AuthoritiesUtils {
                         hasAccess: true
                     },
                     {
+                        name: rolesTypes.MANAGER_VIEW,
+                        hasAccess: true
+                    },
+                    {
                         name: rolesTypes.ADMIN,
                         hasAccess: false
                     },
@@ -31,6 +35,10 @@ export default class AuthoritiesUtils {
                     },
                     {
                         name: rolesTypes.MANAGER,
+                        hasAccess: true
+                    },
+                    {
+                        name: rolesTypes.MANAGER_VIEW,
                         hasAccess: true
                     },
                     {
@@ -53,8 +61,35 @@ export default class AuthoritiesUtils {
                         hasAccess: true
                     },
                     {
+                        name: rolesTypes.MANAGER_VIEW,
+                        hasAccess: true
+                    },
+                    {
                         name: rolesTypes.ADMIN,
                         hasAccess: true
+                    },
+                    {
+                        name: rolesTypes.OPERATOR,
+                        hasAccess: true
+                    }
+                ]
+            case rolesTypes.MANAGER_VIEW:
+                return [
+                    {
+                        name: rolesTypes.OWNER,
+                        hasAccess: false
+                    },
+                    {
+                        name: rolesTypes.MANAGER,
+                        hasAccess: false
+                    },
+                    {
+                        name: rolesTypes.MANAGER_VIEW,
+                        hasAccess: true
+                    },
+                    {
+                        name: rolesTypes.ADMIN,
+                        hasAccess: false
                     },
                     {
                         name: rolesTypes.OPERATOR,
@@ -70,6 +105,10 @@ export default class AuthoritiesUtils {
                     {
                         name: rolesTypes.MANAGER,
                         hasAccess: false
+                    },
+                    {
+                        name: rolesTypes.MANAGER_VIEW,
+                        hasAccess: true
                     },
                     {
                         name: rolesTypes.ADMIN,
@@ -91,7 +130,11 @@ export default class AuthoritiesUtils {
         return user.role === rolesTypes.MANAGER || user.role === rolesTypes.OWNER || user.role === rolesTypes.ADMIN
     }
 
+    static userHasManagerRoleView(user) {
+        return user.role === rolesTypes.MANAGER || user.role === rolesTypes.MANAGER_VIEW || user.role === rolesTypes.OWNER || user.role === rolesTypes.ADMIN
+    }
+
     static userHasOperatorRole(user) {
-        return user.role === rolesTypes.OPERATOR || user.role === rolesTypes.ADMIN
+        return user.role === rolesTypes.OPERATOR || user.role === rolesTypes.ADMIN|| user.role === rolesTypes.MANAGER_VIEW
     }
 }
