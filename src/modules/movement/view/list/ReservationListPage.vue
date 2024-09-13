@@ -2,7 +2,7 @@
     <page-container class="operacaoBusca">
         <search-row
             :filter="filter"
-            :showNew="true"
+            :showNew="!viewUser()"
             :advancedSearch="true"
             @new="newEvent()"
             @advancedSearch="resetTable">

@@ -2,12 +2,13 @@
     <page-container class="clienteBusca">
         <search-row
             v-model="search"
-            :showNew="true"
-            :adminNew="true"
+            :showNew="!viewUser()"
+            :adminNew="!viewUser()"
             :advancedSearch="true"
             @new="newEvent()">
             <template v-slot:buttons>
                 <v-btn
+                    v-if="!viewUser()"
                     depressed
                     color="secondary"
                     class="ml-4"

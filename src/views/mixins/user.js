@@ -13,6 +13,9 @@ export default {
         },
         operatorUser() {
             return AuthoritiesUtils.userHasOperatorRole(this.$store.state.loki.user)
+        },
+        viewUser() {
+            return AuthoritiesUtils.userHasOnlyViewRole(this.$store.state.loki.user)
         }
     }
 }

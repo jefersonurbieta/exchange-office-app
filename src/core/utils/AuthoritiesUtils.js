@@ -137,4 +137,8 @@ export default class AuthoritiesUtils {
     static userHasOperatorRole(user) {
         return user.role === rolesTypes.OPERATOR || user.role === rolesTypes.ADMIN|| user.role === rolesTypes.MANAGER_VIEW
     }
+
+    static userHasOnlyViewRole(user) {
+        return user.role === rolesTypes.MANAGER_VIEW
+    }
 }

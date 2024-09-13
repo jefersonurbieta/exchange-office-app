@@ -1,5 +1,5 @@
 <template>
-    <template-default showMainAction show-main-header>
+    <template-default :showMainAction="!viewUser()" show-main-header>
         <v-row
             slot="main-action"
             align="center"
