@@ -17,7 +17,7 @@ export default [
                 title: 'Despesas',
                 subtitle: 'Lista de Despesas'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN]
         }
     },
     {
@@ -29,7 +29,7 @@ export default [
                 title: 'Despesas',
                 subtitle: 'Nova Despesa'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN]
         }
     },
     {
@@ -41,7 +41,7 @@ export default [
                 title: 'Despesas',
                 subtitle: 'Dados de Despesa'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN]
         }
     },
 ]

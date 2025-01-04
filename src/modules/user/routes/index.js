@@ -17,7 +17,7 @@ export default [
                 title: 'Usuários',
                 subtitle: 'Lista geral dos Usuários'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN]
         }
     },
     {
@@ -29,7 +29,7 @@ export default [
                 title: 'Usuários',
                 subtitle: 'Novo Usuário'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN]
         }
     },
     {
@@ -41,7 +41,7 @@ export default [
                 title: 'Usuários',
                 subtitle: 'Detalhes do Usuário'
             },
-            authorities: [rolesTypes.ADMIN, rolesTypes.MANAGER]
+            authorities: [rolesTypes.ADMIN]
         }
     }
 ]
