@@ -55,6 +55,7 @@
 
         <movement-buttons
             v-if="!loading"
+            v-model="movement"
             :showPrint="movement.id && (movement.type === movementTypes.PURCHASE_SALE || movement.type === movementTypes.CLOSURE)"
             :editable="editing || !movement.id"
             @cancel="cancel"
