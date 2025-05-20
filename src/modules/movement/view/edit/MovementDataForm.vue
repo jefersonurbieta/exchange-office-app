@@ -178,7 +178,7 @@
                    v-if="value.product && value.product.showIOF && value.product.showAmount">
                 <field-label>Taxa Líquida</field-label>
                 <field-view
-                    :text="value.liquidRate | real"/>
+                    :text="value.liquidRate | value(value.product.quantityDecimalPlacesValue)"/>
             </v-col>
 
             <v-col cols="12" md="3"
@@ -193,11 +193,11 @@
 
 <script>
 
-    import {NumberUtils} from '@/core/utils'
-    import {movementOperationTypes, productTypes} from '@/core/constants'
-    import StatusTypes from '@/core/constants/status-types'
+import {NumberUtils} from '@/core/utils'
+import {movementOperationTypes, productTypes} from '@/core/constants'
+import StatusTypes from '@/core/constants/status-types'
 
-    export default {
+export default {
         props: {
             value: {
                 required: true,

@@ -26,10 +26,10 @@
                 {{ hideByType(item) | value }}
             </template>
             <template v-slot:item.productCost="{ item }">
-                {{ item.productCost | real }}
+                {{ item.productCost | realWithCustomDecimalPlaces }}
             </template>
             <template v-slot:item.liquidRate="{ item }">
-                {{ item.liquidRate | real }}
+                {{ item.liquidRate | valueWithCustomDecimalPlaces }}
             </template>
             <template v-slot:item.value="{ item }">
                 {{ item.value | real }}
@@ -45,6 +45,7 @@
 
 <script>
     import {movementOperationTypes, movementTargetTypes, movementTypes, mutationTypes} from '@/core/constants'
+    import realWithCustomDecimalPlaces from "@/views/filters/realWithCustomDecimalPlaces";
 
     export default {
         props: {
@@ -163,6 +164,7 @@
             }
         },
         methods: {
+            realWithCustomDecimalPlaces,
             targetName(item) {
                 if (item.type === movementTypes.PURCHASE_SALE) {
                     return item.customerName

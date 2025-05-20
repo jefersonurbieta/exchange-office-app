@@ -44,7 +44,7 @@
                         Custo do Produto
                     </field-label>
                     <field-view
-                        :text="value.productCost"/>
+                        :text="value.productCost | valueWithCustomDecimalPlaces"/>
                 </v-col>
 
                 <v-col
@@ -54,7 +54,7 @@
                         Quantidade
                     </field-label>
                     <field-view
-                        :text="value.amount | value(value.product.quantityDecimalPlacesAmount)"/>
+                        :text="value.amount | valueWithCustomDecimalPlaces"/>
                 </v-col>
 
                 <v-col
@@ -64,7 +64,7 @@
                         {{ labelProductCost(false) }}
                     </field-label>
                     <field-view
-                        :text="value.rate | value(value.product.quantityDecimalPlacesAmount)"/>
+                        :text="value.rate | value(value.product.quantityDecimalPlacesValue)"/>
                 </v-col>
 
                 <v-col
@@ -104,7 +104,7 @@
                        v-if="value.product && value.product.showIOF && value.product.showAmount">
                     <field-label>Taxa Líquida</field-label>
                     <field-view
-                        :text="value.liquidRate | real"/>
+                        :text="value.liquidRate | value(value.product.quantityDecimalPlacesValue)"/>
                 </v-col>
 
                 <v-col cols="12" md="4"
@@ -131,7 +131,7 @@
                         Valor
                     </field-label>
                     <field-view
-                        :text="value.value"/>
+                        :text="value.value | real"/>
                 </v-col>
 
                 <v-col
@@ -171,7 +171,7 @@
                         Quantidade
                     </field-label>
                     <field-view
-                        :text="value.amount"/>
+                        :text="value.amount | valueWithCustomDecimalPlaces"/>
                 </v-col>
 
                 <v-col
@@ -191,7 +191,7 @@
                         Taxa
                     </field-label>
                     <field-view
-                        :text="value.rate"/>
+                        :text="value.rate | valueWithCustomDecimalPlaces"/>
                 </v-col>
             </v-row>
 
