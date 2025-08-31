@@ -28,8 +28,6 @@
                         maxlength="100"
                         name="Email"
                         placeholder="Ex. geovanna@email.com"
-                        :required="!reservation"
-                        v-validate="reservation ? '' : 'required'"
                         solo
                         flat
                         shaped/>
@@ -99,8 +97,6 @@
                         maxlength="15"
                         name="Telefone"
                         placeholder="(00) 00000-0000"
-                        :required="!reservation"
-                        v-validate="reservation ? '' : 'required'"
                         solo
                         flat
                         shaped/>

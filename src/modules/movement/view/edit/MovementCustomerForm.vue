@@ -140,9 +140,7 @@
                 }
             },
             async save() {
-                if (!this.localCustomer.name
-                    || (!this.reservation && !this.localCustomer.email)
-                    || (!this.reservation && !this.localCustomer.phone)) {
+                if (!this.localCustomer.name) {
                     await this.$validator._base.validateAll()
                     return
                 }
